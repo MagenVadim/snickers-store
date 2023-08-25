@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body>    
+    <!-- MODAL WINDOW -->
+    <div class="front-main-image">
+        <img class="inside-main-image" src="images/image-product-1.jpg" alt="image">
+        <img  class="icon-close" src="images/icon-close.svg" alt="icon-close">
+
+        <div class="icon-arrow previous">
+            <img src="images/icon-previous.svg" alt="icon">
+        </div>
+        <div class="icon-arrow next">
+            <img src="images/icon-next.svg" alt="icon">
+        </div>
+    </div>
+
+
+
+    <!-- LEFT-SIDE BAR (CHECKBOXES)-->
+    <div class="left-side-bar">
+        <div class="form-check-input">
+            <input type="checkbox" id="sort-0001" value="running" class="checkbox-button">
+            <label for="sort-0001">Running</label>
+        </div>
+
+        <div class="form-check-input">
+            <input type="checkbox" id="sort-0002" value="basket" class="checkbox-button">
+            <label for="sort-0001">Basket</label>
+        </div>
+
+        <div class="form-check-input">
+            <input type="checkbox" id="sex-men" value="men" class="checkbox-button">
+            <label for="sort-0002">Men</label>
+        </div>
+
+        <div class="form-check-input">
+            <input type="checkbox" id="sex-women" value="women" class="checkbox-button">
+            <label for="sort-0003">Women</label>
+        </div>
+
+        <div class="form-check-input">
+            <input type="checkbox" id="sort-0005" value="latest" class="checkbox-button">
+            <label for="sort-0004">Latest</label>
+        </div>
+    </div>
+
+
+
+
+    <!-- RIGHT-SIDE BAR -->
+    <div class="right-side-bar"></div>
+
+    <div class="container">
+        <!-- NAVIGATION BAR -->
+        <div class="nav-bar">
+            <div class="logo">
+                <img src="images/logo.svg" alt="logo">
+            </div>
+            <div class="section">
+                <div class="topic" id="start-home">
+                    <p class="nav-section">Home</p>
+                    <hr class="underline">
+                </div>
+                <div class="topic">
+                    <p class="nav-section">Collections</p>
+                    <hr class="underline">
+                </div>
+                
+                <div class="topic">
+                    <p class="nav-section">Men</p>
+                    <hr class="underline">
+                </div>
+                <div class="topic">
+                    <p class="nav-section" id="women">Women</p>
+                    <hr class="underline">
+        <!-- LIST ITEMS -->         
+                    <div class="list-parent hidden">
+                        <ul class="list-items">
+                            <template>
+                                <li class="firm-name">Puma</li>
+                            </template>    
+                        </ul>  
+                    </div>
+                                     
+                </div>
+
+                <div class="topic">
+                    <p class="nav-section">About</p>
+                    <hr class="underline">
+                </div>
+                <div class="topic">
+                    <p class="nav-section">Contact</p>
+                    <hr class="underline">
+                </div>
+
+            </div>
+            <div class="icon">
+
+                <!-- CART -->
+                <div class="basket">
+                    <img src="images/icon-cart.svg" alt="cart">                                                         
+                </div>  
+                
+                <div class="cart-parent hidden">
+                    <div class="popup_parent">
+
+                        <div class="navigation-checkout first-step">    
+                            <div class="close-shipping-form" id="close-first-step">
+                                <img  class="icon-close-shipping" src="images/icon-close.svg" alt="icon-close">
+                            </div>
+                        </div>
+
+                        <div class="popup">
+                            <p class="cart">Cart</p>
+                            <p class="total-sum">Total Sum 
+                                <strong class="strong-total-sum"> $0.00</strong>
+                            </p>
+                                                  
+                        </div>    
+                        <hr>                 
+                        <div class="empty-cart">
+                            <p class="cart-containt-empty">Your cart is empty.</p>
+                        </div>
+                        <div id="cart-description" class="cart-description hidden">   
+                            <div class="basket-item-list">
+    
+                            </div>
+                            <div class="checkout-button">
+                                <form>
+                                    <button type=button class="checkout">Checkout</button>
+                                </form>
+                            </div>
+    
+                            <!-- ВЫБРАННАЯ И ДОБАВЛЕННАЯ ПОЗИЦИЯ В КОРЗИНУ  -->
+                            <template>
+                                <div class="cart-containt-full" id="">
+                                    <div>
+                                        <img src="images/image-product-1-thumbnail.jpg" alt="thumbnail" class="item-image">
+                                    </div>
+                                    <div class="item">
+                                        <p class="title-selected-item">Fall Limited Edition Sneakers</p>
+                                        <p class="detail-price">$125.00 x 3 <strong> $375.00</strong></p>
+                                    </div>
+                                    <div class="delete-icon">
+                                        <img src="images/icon-delete.svg" class="basket-icon-delete" alt="delete">
+                                    </div>                            
+                                </div>
+                            </template>
+                        </div>
+    
+                    </div>
+
+                    <!-- окно-форма для "SHIPPING" -->
+                    <div class="checkout-form hidden">
+                        <div class="navigation-checkout">
+                            <div class="back-arrow-shipping">
+                                <img  class="icon-arrow-shipping" src="images/icon-arrow-left.svg" alt="icon-close">
+                            </div>
+    
+                            <div class="close-shipping-form" id="close-second-step">
+                                <img  class="icon-close-shipping" src="images/icon-close.svg" alt="icon-close">
+                            </div>
+                        </div>
+
+
+                        <div class="shipping-address checkout-design">
+                            <h3 class="checkout-header">Shipping address</h3>
+                            <p class="client-name">Vadym Smahin</p>
+                            <p>+972 52 9348987</p>
+                            <p>st Herzel 96/6, ap 8</p>
+                            <p>Haifa</p>
+                            <p class="state">Israel, 3317402
+                                 <a href="#">Change address</a>
+                            </p>
+                        </div>
+                        <div class="payment-method checkout-design">
+                            <h3 class="checkout-header">Payment method</h3>
+
+                            <form class="form-design" onsubmit="return false">                                             
+                                <label>                                        
+                                    <input type="radio" name="flexRadio">
+                                    Add a new card
+                                </label>
+                                <label>                                      
+                                    <input type="radio" name="flexRadio">
+                                    PayPal
+                                </label>         
+                            </form>   
+                        </div>
+
+                        <div class="back-checkout-form">
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- COUNTER -->
+                <div class="counter">
+                    <span class="number">3</span>
+                </div>
+
+                <!-- AVATAR -->
+                <div class="avatar">
+                    <img class="avatar" src="images/image-avatar.png" alt="avatar">
+                </div>
+            </div>
+        </div>
+        <hr class="long-line">
+
+
+        <!-- HOME PAGE -->
+        <div class="home">
+            <div class="sorting-bar">
+            </div>
+            <template>
+                <div class="snickers-container">
+                    <div class="firm-header"></div>
+                    <div class="slick-slide-container"></div>
+                </div>
+            </template>  
+
+            <div class="presentation"> </div>
+        </div>
+
+        <!-- MAIN PAGE -->
+        <div class="main hidden">
+            <!-- LEFT SIDE -->
+            <div class="left-side">
+                <img class="main-image" src="images/image-product-1.jpg" alt="image">
+                <div class="preview">
+                    <img src="images/image-product-1-thumbnail.jpg" alt="thumbnail" id="nail-1" class="img-preview selected">
+                    <img src="images/image-product-2-thumbnail.jpg" alt="thumbnail" id="nail-2" class="img-preview">
+                    <img src="images/image-product-3-thumbnail.jpg" alt="thumbnail" id="nail-3" class="img-preview">
+                    <img src="images/image-product-4-thumbnail.jpg" alt="thumbnail" id="nail-4" class="img-preview">
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="right-side">
+                <p class="company-name">SNEAKER COMPANY</p>
+                <h1 class="header">Fall Limited Edition Sneakers</h1>
+                <p class="description-company">These low-profile sneakers are your perfect casual wear companion. Featuring a 
+                    durable rubber outer sole, they’ll withstand everything the weather can offer.</p>
+                <div class="total-price">
+                    <p class="price">$125.00</p>
+                    <p class="discount">50%</p>
+                </div>
+                <p class="old-price">$250.00</p>
+
+                <div class="buttons">
+                    <div class="plus-minus">
+                        <button class="math minus" id="button-minus">
+                            <img src="/images/icon-minus.svg" id="image-minus" alt="minus">
+                        </button>
+                        <p class="result">1</p>
+                        <button class="math plus" id="button-plus">
+                            <img src="/images/icon-plus.svg" id="image-plus" alt="plus">
+                        </button>
+                    </div>
+                    <button class="add-to-cart">
+                         <img src="/images/icon-cart-white.svg" alt="cart" class="img-basket">Add to cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
