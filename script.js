@@ -150,7 +150,18 @@ function main_page(collection_details){
 
                 const sex = document.createElement("p");
                 sex.className="sex-name";
-                sex.textContent=`sex: ${collection_details[tag].sex}`;
+                sex.textContent="sex: ";
+
+                const sex_context = document.createElement("span");                
+                sex_context.textContent=`${collection_details[tag].sex}`;
+                console.log(collection_details[tag].sex);
+                if(collection_details[tag].sex=="men"){
+                    sex_context.className="sex-context men";
+                };
+                if(collection_details[tag].sex=="women"){
+                    sex_context.className="sex-context women";
+                };
+                sex.appendChild(sex_context);
                 slick_slide.appendChild(sex);
 
                 const style = document.createElement("p");

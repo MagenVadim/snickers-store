@@ -572,3 +572,13 @@ body{
     margin-right: 5rem;
     gap: 2rem;
 }
+.sex-context.men{
+    padding: 0 5px;
+    border-radius: 5px;
+    background-color: rgb(203, 236, 247);
+}
+.sex-context.women{
+    padding: 0 5px;
+    border-radius: 5px;
+    background-color: rgb(250, 215, 220);
+}
