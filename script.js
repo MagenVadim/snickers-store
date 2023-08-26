@@ -80,7 +80,7 @@ let collection_details = {
 },
     "2023-555":{new_price: "$180.00", old_price: "$360.00", discount:"50%", 
     model:"SUPERSTAR XLG SHOES",description:"The full leather upper stays true to its vintage roots while reimagining the silhouette to keep things fresh. Take every step in confidence when the shell toe leads the way.",
-    sex:"women", firm:"Adidas", style: "basket"
+    sex:"women", firm:"Adidas", style: "tennis"
 },
     "2023-888":{new_price: "$260.00", old_price: "$390.00", discount:"33%", 
     model:"Asics Gel-Kayano 30 Anniversary",description:"Stability has never felt better. Experience a new and improved take on stability in the Asics Gel Kayano 30. Updated with an all-new, revolutionary 4D Guidance system that provides adaptive, high-level stability while maintaining reliable performance that supports runners every step of the way. From 5K to the marathon, the softest iteration of Asics Gel technology to date, the interior PureGEL technology is there to provide enhanced shock absorption, softer landings, and smoother transitions.",
@@ -96,7 +96,7 @@ let collection_details = {
 },
     "2023-996":{new_price: "$215.00", old_price: "$320.00", discount:"33%", 
     model:"M 990 WG3",description:"Probably the most famous grey sneaker on the market - the New Balance 990. But also in other colorways the sneaker is just stunning. And with its outstanding quality and timeless design you never go wrong with the classic 990.",
-    sex:"women", firm:"New Balance", style: "running"
+    sex:"women", firm:"New Balance", style: "tennis"
 },
     "2023-995":{new_price: "$320.00", old_price: "$370.00", discount:"15%", 
     model:"WRPD RUNNER",description:"the WRPD Runner deviates from traditional lifestyle models from New Balance as the shoe combines its newest tech with the aesthetic of futuristic designs.",
@@ -120,6 +120,7 @@ let main_collection_tag = Object.keys(collection_details); // collection of ALL 
 const container_presentation = document.querySelector('.presentation'); // The container to attach the cloned TEMPLATE to 
 
 
+
 // the main function that builds images of Snickers Items on the Home Page.
 function main_page(collection_details){
     for (firm in busket_collection){
@@ -128,7 +129,7 @@ function main_page(collection_details){
         const snickers_container = clone.querySelector(".snickers-container");
         const firm_header = clone.querySelector(".firm-header");   
         firm_header.innerText = firm;
-    
+
         for (tag in collection_details){
             if(collection_details[tag].firm===firm){
                 var slick_slide_container = clone.querySelector(".slick-slide-container"); 
@@ -154,7 +155,6 @@ function main_page(collection_details){
 
                 const sex_context = document.createElement("span");                
                 sex_context.textContent=`${collection_details[tag].sex}`;
-                console.log(collection_details[tag].sex);
                 if(collection_details[tag].sex=="men"){
                     sex_context.className="sex-context men";
                 };
@@ -173,7 +173,7 @@ function main_page(collection_details){
                 item_price.className="item-price";
                 item_price.textContent=collection_details[tag].new_price;
                 slick_slide.appendChild(item_price);   
-            }           
+            }                
         }
         container_presentation.appendChild(snickers_container);           
     }
@@ -199,13 +199,7 @@ function checkbox_sex(income_sex){
             container_presentation.innerHTML='';          
             new_collection_details[key]=collection_details[key];
         } 
-//+++++++++++++++++++++************************************************+++++++++++++++++++++++++/
-        if(income_sex==collection_details[key].style){  
-            container_presentation.innerHTML='';          
-            new_collection_details[key]=collection_details[key];
-        } 
     }  
-    console.log(new_collection_details)
 
     let b = main_page(new_collection_details); // array containing all icons of all Snickers Items of the Home page.
     move_to_detailes(b); 
@@ -218,30 +212,60 @@ function checkbox_sex(income_sex){
 // - at the same time the checkboxes "man" and "woman" are checked, then the function returns the page state to default,
 function checkbox_status(){
     let ch_bx_true = 0;
-    let ch_box_values_list=[];
+    let ch_box_values_list=[];    
+    let array_key_styles = [];
+    let new_collect = collection_details;
+    let new_collection_details = {};
 
-    checkboxes_array.forEach((buttonCheckbox)=>{
-
+    checkboxes_array.forEach((buttonCheckbox)=>{       
         if(buttonCheckbox.checked===true){
             ch_bx_true +=1;
-            ch_box_values_list.push(buttonCheckbox.value) // the function adds the values of checked checkboxes to the array.
-        };
-        if (buttonCheckbox.value=='men' && buttonCheckbox.checked){
-            checkbox_sex('men');
-        } 
-        if (buttonCheckbox.value=='women'&& buttonCheckbox.checked){
-            checkbox_sex('women');
+            ch_box_values_list.push(buttonCheckbox.value) // the function adds the values of checked checkboxes to the array.  
+        };      
+ 
+    })        
+   
+    // firstly, check if one of conditions  is selected ('men'/'women'), and add to new array ("new_collect") all Snickers items to match to this criterion.
+    if(ch_box_values_list.length>0){
+        if(ch_box_values_list.includes('men') || ch_box_values_list.includes('women')){
+            if (ch_box_values_list.includes('men') && ch_box_values_list.includes('women') && ch_box_values_list.length>2) new_collect=collection_details;
+            else {
+                ch_box_values_list.forEach((sex)=>{
+                    if(sex=='men') new_collect = checkbox_sex('men');
+                    if(sex=='women') new_collect = checkbox_sex('women');
+                })
+            }
         }
-        if (buttonCheckbox.value=='running'&& buttonCheckbox.checked){
-            checkbox_sex('running');
-        }       
-    })    
-    if (ch_bx_true==0 || (ch_box_values_list.includes('men') && ch_box_values_list.includes('women'))) {
+
+    if(ch_box_values_list.includes('running') || ch_box_values_list.includes('basket') || ch_box_values_list.includes('tennis'))
+        {
+            for (key in new_collect){
+                let item_style = collection_details[key].style;
+                
+
+                ch_box_values_list.forEach((val)=>{
+                        
+                    // add in "array_key_styles" the each "style value" if they checked, for passing in "main_page()" function
+                    if(val==item_style){
+                    array_key_styles.push(key);
+                    } 
+                })          
+            }
+        array_key_styles.forEach((key)=>{            
+            new_collection_details[key]=collection_details[key];            
+        })
+        container_presentation.innerHTML='';        
+        main_page(new_collection_details);
+    }
+}
+    // condition when both checkbockes are checked ('men'/'women')
+    if (ch_bx_true==0 || (ch_box_values_list.includes('men') && ch_box_values_list.includes('women') && ch_box_values_list.length==2) ) {
+        console.log(ch_box_values_list.length);
+
         container_presentation.innerHTML='';
         main_page(collection_details);
     }
 }
-
 
 // in an array of all checkbox elements, find the checkbox on which the click was made and call the function with this value.
 checkboxes_array.forEach((buttonCheckbox)=>{    
