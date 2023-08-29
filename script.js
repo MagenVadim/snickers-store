@@ -219,6 +219,7 @@ function checkbox_sex(income_sex){
 // the function checks the state of all checkboxes, and if:
 // - none of them is checked, then the function returns the page state to default,
 // - at the same time the checkboxes "man" and "woman" are checked, then the function returns the page state to default,
+
 function checkbox_status(){
     let ch_bx_true = 0;
     let ch_box_values_list=[];    
@@ -230,8 +231,7 @@ function checkbox_status(){
         if(buttonCheckbox.checked===true){
             ch_bx_true +=1;
             ch_box_values_list.push(buttonCheckbox.value) // the function adds the values of checked checkboxes to the array.  
-        };      
- 
+        };       
     })        
    
     // firstly, check if one of conditions  is selected ('men'/'women'), and add to new array ("new_collect") all Snickers items to match to this criterion.
@@ -246,31 +246,64 @@ function checkbox_status(){
             }
         }
 
-    if(ch_box_values_list.includes('running') || ch_box_values_list.includes('basket') || ch_box_values_list.includes('tennis'))
-        {
-            for (key in new_collect){
-                let item_style = collection_details[key].style;
-                
+    if(ch_box_values_list.includes('running') || ch_box_values_list.includes('basket') || ch_box_values_list.includes('tennis')) {
+        for (key in new_collect){
+            let item_style = collection_details[key].style;            
 
-                ch_box_values_list.forEach((val)=>{
-                        
-                    // add in "array_key_styles" the each "style value" if they checked, for passing in "main_page()" function
-                    if(val==item_style){
-                    array_key_styles.push(key);
-                    } 
-                })          
-            }
+            ch_box_values_list.forEach((val)=>{                    
+                // add in "array_key_styles" the each "style value" if they checked, for passing in "main_page()" function
+                if(val==item_style){
+                array_key_styles.push(key);
+                } 
+            })          
+        }
+
         array_key_styles.forEach((key)=>{            
             new_collection_details[key]=collection_details[key];            
         })
+
         container_presentation.innerHTML='';        
         main_page(new_collection_details);
     }
+
+    
+    if(ch_box_values_list.includes('latest')){
+
+        // if one or more of the checkbox styles (running/basket/tennis) is checked 
+        if(Object.keys(new_collection_details).length>0){
+
+            array_key_styles=[];
+            for (key in new_collection_details){
+                let collection_name = new_collection_details[key].collection; 
+                if(collection_name=='new')array_key_styles.push(key);               
+            }
+
+            new_collection_details={};
+            array_key_styles.forEach((key)=>{            
+                new_collection_details[key]=collection_details[key];            
+            })
+            container_presentation.innerHTML='';
+            main_page(new_collection_details);
+        }
+
+        // (in other cases (when male/female gender checkbox is selected) or nothing is selected)
+        else {
+            for (key in new_collect){
+                let collection_name = new_collect[key].collection;                
+                if(collection_name=='new')array_key_styles.push(key);      
+            }
+            array_key_styles.forEach((key)=>{            
+                new_collection_details[key]=collection_details[key];            
+            })
+            container_presentation.innerHTML='';
+            main_page(new_collection_details);
+        }        
+    }
 }
+
+
     // condition when both checkbockes are checked ('men'/'women')
     if (ch_bx_true==0 || (ch_box_values_list.includes('men') && ch_box_values_list.includes('women') && ch_box_values_list.length==2) ) {
-        console.log(ch_box_values_list.length);
-
         container_presentation.innerHTML='';
         main_page(collection_details);
     }
