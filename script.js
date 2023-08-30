@@ -116,6 +116,10 @@ let collection_details = {
     model:"ULTRABOOST 22 COLD.RDY",description:"Running shoes from Adidas and model ULTRABOOST 22 COLD.RDY 2.0 combined with laces. The shoes have 3 light-reflecting stripes, the Linear Energy Push system, a thick leather-reflecting sole and the brand logo on the tongue.",
     sex:"men", firm:"Adidas", style: "running", collection: "new"
 },
+"2023-993":{new_price: "$170.00", old_price: "$230.00", discount:"27%", 
+    model:"Fresh Foam X More V4 Running Shoes",description:"The most Fresh Foam used in any shoe to date, the latest in the line utilizes more Fresh Foam X, stacks it higher than ever before, and distributes it across the length of the shoe, offering a plush, yet stable underfoot experience.",
+    sex:"women", firm:"New Balance", style: "running", collection: "new"
+}
 }
 
 let main_collection_tag = Object.keys(collection_details); // collection of ALL catalog numbers of the ENTIRE store

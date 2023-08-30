@@ -604,3 +604,13 @@ body{
     border-radius: 5px;
     background-color: rgb(250, 215, 220);
 }
+.header-dropdown{
+    display: flex;
+}
+.image-arrow-dropdown{
+    height: 30px;
+    width: 30px;
+    margin-top: 30px;
+    margin-left: 50px;
+    cursor: pointer;
+}
