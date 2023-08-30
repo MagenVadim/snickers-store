@@ -25,10 +25,20 @@ body{
     margin: 50px;
     width: 1100px;
 }
+
+.navigation-panel{
+    position: fixed;
+    top: 0;
+    z-index: 5;
+    background-color: rgba(255, 255, 255, 1);
+    width: 1100px;
+}
+
 .nav-bar{
     display: flex;
     align-items: flex-start;
     height: 70px;
+    padding: 50px;
 }
 .section{
     position: relative;
@@ -214,7 +224,7 @@ body{
     background-color: white;
     width: 400px;
     height: 400px;
-    z-index: 1;
+    z-index: 0.8;
     border-radius: .7rem;
     box-shadow: 0 0 10px rgba(0,0,0,0.5); 
     padding: 20px;   
@@ -253,7 +263,7 @@ body{
     width: 400px;
     /* height: 430px; */
     max-height: 500px;    
-    z-index: 1;
+    z-index: 0.8;
     border-radius: .7rem;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     padding: 20px;
@@ -363,7 +373,7 @@ body{
     justify-content: center;
     align-items: center;
     position: absolute;
-    z-index: 1;
+    z-index: 0.8;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -533,7 +543,7 @@ body{
     position: absolute;
     height: 40px;
     width: 40px;
-    z-index: 0.8;
+    z-index: 0.7;
     margin-left: 160px;
     border-radius: 5px;
 }
@@ -581,6 +591,8 @@ body{
     margin-top: 12rem;
     margin-right: 5rem;
     gap: 2rem;
+    position: fixed;
+    left: 150px;
 }
 .sex-context.men{
     padding: 0 5px;

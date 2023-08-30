@@ -53,6 +53,8 @@ const checkout_button = document.querySelector(".checkout-button")
 
 const main = document.querySelector(".main");
 const home = document.querySelector(".home");
+const left_side_bar = document.querySelector('.left-side-bar');
+
 const start_home = document.querySelector('#start-home');
 const back_arrow_shipping = document.querySelector('.back-arrow-shipping');
 const close_checkout_form = document.querySelector('#close-first-step');
@@ -655,7 +657,9 @@ function move_to_detailes(slick_container){
             set_image(tag_item_number);
             set_details(tag_item_number);
             main.classList.toggle("hidden");
-            home.classList.toggle("hidden");    
+            home.classList.toggle("hidden");
+            left_side_bar.style.display="none";
+            left_side_bar.classList.toggle("hidden"); 
         })               
     })
 }
