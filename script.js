@@ -705,3 +705,21 @@ close_shipping_form.addEventListener('click', ()=>{
 
 
 
+const header_dropdown = document.querySelector('image-arrow-dropdown');
+home.addEventListener('click', (e)=>{
+    const header_arrow_dropdown = e.target.closest('.image-arrow-dropdown');
+    const header_div = header_arrow_dropdown.parentNode;
+    const grandParent = header_div.parentNode;
+    const sibling_slide_container = grandParent.nextElementSibling;
+    if (getComputedStyle(sibling_slide_container).display=='flex'){
+        sibling_slide_container.style.display="none";
+        e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropup.png";
+    }
+    else {
+        sibling_slide_container.style.display="flex";
+        e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropdown.png";
+    }
+})
+
+
+
