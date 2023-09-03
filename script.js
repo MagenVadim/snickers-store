@@ -60,8 +60,6 @@ const back_arrow_shipping = document.querySelector('.back-arrow-shipping');
 const close_checkout_form = document.querySelector('#close-first-step');
 const close_shipping_form = document.querySelector('#close-second-step');
 
-
-
 let json_catalog_number = "2023-999";
 
 let busket_collection = {
@@ -72,51 +70,51 @@ let busket_collection = {
 };
 
 let collection_details = {
-    "2023-999":{new_price: "$100.00", old_price: "$130.00", discount:"30%", 
+    "2023-999":{new_price: 100.00, old_price: "$130.00", discount:"30%", 
     model:"Fresh Foam X 880v13",description:"Function meets performance the New Balance Fresh Foam X 880v13. Featuring a plush and supportive Fresh Foam X midsole and NDurance rubber outsole, this shoe delivers enhanced performance and comfort with each step. Complete with clean lines and simple style, this running shoe has a modern look that’s perfect for everyday use.",
     sex:"men", firm:"New Balance", style: "running", collection: "new"
 },
-    "2023-123":{new_price: "$200.00", old_price: "$250.00", discount:"20%", 
+    "2023-123":{new_price: 200.00, old_price: "$250.00", discount:"20%", 
     model:"Cilia Lux Women's Training Trainers",description:"The bulky silhouette on these female-first sneakers provides cushioning and comfort. The new fashion trainer Cilia Lux introduces a distinctive look and practical features that are sure to 'light up' feminine footwear..",
     sex:"women", firm:"Puma", style: "basket", collection: "summer"
 },
-    "2023-555":{new_price: "$180.00", old_price: "$360.00", discount:"50%", 
+    "2023-555":{new_price: 180.00, old_price: "$360.00", discount:"50%", 
     model:"SUPERSTAR XLG SHOES",description:"The full leather upper stays true to its vintage roots while reimagining the silhouette to keep things fresh. Take every step in confidence when the shell toe leads the way.",
     sex:"women", firm:"Adidas", style: "tennis", collection: "new"
 },
-    "2023-888":{new_price: "$260.00", old_price: "$390.00", discount:"33%", 
+    "2023-888":{new_price: 260.00, old_price: "$390.00", discount:"33%", 
     model:"Asics Gel-Kayano 30 Anniversary",description:"Stability has never felt better. Experience a new and improved take on stability in the Asics Gel Kayano 30. Updated with an all-new, revolutionary 4D Guidance system that provides adaptive, high-level stability while maintaining reliable performance that supports runners every step of the way. From 5K to the marathon, the softest iteration of Asics Gel technology to date, the interior PureGEL technology is there to provide enhanced shock absorption, softer landings, and smoother transitions.",
     sex:"women", firm:"Asics", style: "running", collection: "winter"
 },
-    "2023-998":{new_price: "$260.00", old_price: "$390.00", discount:"33%", 
+    "2023-998":{new_price: 260.00, old_price: "$390.00", discount:"33%", 
     model:"New Balance ML373",description:"Stability has never felt better. Experience a new and improved take on stability in the Asics Gel Kayano 30. Updated with an all-new, revolutionary 4D Guidance system that provides adaptive, high-level stability while maintaining reliable performance that supports runners every step of the way.",
     sex:"men", firm:"New Balance", style: "basket", collection: "new"
 },
-    "2023-997":{new_price: "$110.00", old_price: "$150.00", discount:"27%", 
+    "2023-997":{new_price: 110.00, old_price: "$150.00", discount:"27%", 
     model:"NUMERIC 212 PRO COURT",description:"This is a skate-specific version of the original NB clay court tennis shoes first debuted in the 1970s. Modern additions like a dual-layer suede ollie area enhances durability. A polyurethane insert absorbs impacts and provides a consistent fit. The Pro Court 212 retains the same relaxed fit of the original with an updated construction for everyday skating.",
     sex:"women", firm:"New Balance", style: "basket", collection: "winter"
 },
-    "2023-996":{new_price: "$215.00", old_price: "$320.00", discount:"33%", 
+    "2023-996":{new_price: 215.00, old_price: "$320.00", discount:"33%", 
     model:"M 990 WG3",description:"Probably the most famous grey sneaker on the market - the New Balance 990. But also in other colorways the sneaker is just stunning. And with its outstanding quality and timeless design you never go wrong with the classic 990.",
     sex:"women", firm:"New Balance", style: "tennis", collection: "winter"
 },
-    "2023-995":{new_price: "$320.00", old_price: "$370.00", discount:"15%", 
+    "2023-995":{new_price: 320.00, old_price: "$370.00", discount:"15%", 
     model:"WRPD RUNNER",description:"the WRPD Runner deviates from traditional lifestyle models from New Balance as the shoe combines its newest tech with the aesthetic of futuristic designs.",
     sex:"men", firm:"New Balance", style: "basket", collection: "new"
 },
-    "2023-124":{new_price: "$120.00", old_price: "$170.00", discount:"40%", 
+    "2023-124":{new_price: 120.00, old_price: "$170.00", discount:"40%", 
     model:"PUMA CARINA",description:"Taking its design cues from the '80s, this classic tennis silhouette feels right at home with the laid-back",
     sex:"men", firm:"Puma", style: "running", collection: "summer"
 },
-    "2023-125":{new_price: "$80.00", old_price: "$160.00", discount:"50%", 
+    "2023-125":{new_price: 80.00, old_price: "$160.00", discount:"50%", 
     model:"Basket Classic",description:"Low leather Puma basket sneakers with laces and a classic rubber sole. The brand logo appears on the tongue, on the sides of the shoe and on the back.",
     sex:"women", firm:"Puma", style: "running", collection: "summer"
 },
-    "2023-556":{new_price: "$180.00", old_price: "$220.00", discount:"20%", 
+    "2023-556":{new_price: 180.00, old_price: "$220.00", discount:"20%", 
     model:"ULTRABOOST 22 COLD.RDY",description:"Running shoes from Adidas and model ULTRABOOST 22 COLD.RDY 2.0 combined with laces. The shoes have 3 light-reflecting stripes, the Linear Energy Push system, a thick leather-reflecting sole and the brand logo on the tongue.",
     sex:"men", firm:"Adidas", style: "running", collection: "new"
 },
-"2023-993":{new_price: "$170.00", old_price: "$230.00", discount:"27%", 
+"2023-993":{new_price: 170.00, old_price: "$230.00", discount:"27%", 
     model:"Fresh Foam X More V4 Running Shoes",description:"The most Fresh Foam used in any shoe to date, the latest in the line utilizes more Fresh Foam X, stacks it higher than ever before, and distributes it across the length of the shoe, offering a plush, yet stable underfoot experience.",
     sex:"women", firm:"New Balance", style: "running", collection: "new"
 }
@@ -185,9 +183,7 @@ function main_page(collection_details){
                     new_icon.className="new-icon";
                     new_icon.src='images/new-icon.jpg';
                     slick_slide.appendChild(new_icon);
-                }
-                
-                
+                }               
             }                
         }
         container_presentation.appendChild(snickers_container);           
@@ -198,6 +194,97 @@ function main_page(collection_details){
 }
 
 main_page(collection_details) // call the function to draw the Snickers Items on the Home page.
+
+// ---------------------------------------SORTING-------------------------------------------------------------
+
+const dropdown_button_sorted_by_price = document.querySelector('#by_price');
+
+
+function presentation_by_sorting(collection_details){
+    const temp = document.getElementsByTagName("template")[2];
+    const clone = temp.content.cloneNode(true);
+    const snickers_container = clone.querySelector(".snickers-container");
+    var header_block = clone.querySelector(".header-dropdown");
+    header_block.innerHTML='';
+
+    for (tag in collection_details){        
+        var slick_slide_container = clone.querySelector(".slick-slide-container");         
+
+        const slick_slide = document.createElement("div");
+        slick_slide.className="slick-slide";
+        slick_slide.id=tag;
+        slick_slide_container.appendChild(slick_slide);
+
+        const slick_image = document.createElement("img");
+        slick_image.className="image-present";
+        slick_image.src=`images/${tag}-image-product-1.jpg`;
+        slick_slide.appendChild(slick_image);
+
+        const item_name = document.createElement("p");
+        item_name.className="item-name";                
+        item_name.textContent=collection_details[tag].model;
+        slick_slide.appendChild(item_name);
+
+        const sex = document.createElement("p");
+        sex.className="sex-name";
+        sex.textContent="sex: ";
+
+        const sex_context = document.createElement("span");                
+        sex_context.textContent=`${collection_details[tag].sex}`;
+        if(collection_details[tag].sex=="men"){
+            sex_context.className="sex-context men";
+        };
+        if(collection_details[tag].sex=="women"){
+            sex_context.className="sex-context women";
+        };
+        sex.appendChild(sex_context);
+        slick_slide.appendChild(sex);
+
+        const style = document.createElement("p");
+        style.className="style-name";
+        style.textContent=`style: ${collection_details[tag].style}`;
+        slick_slide.appendChild(style);
+
+        const item_price = document.createElement("p");
+        item_price.className="item-price";
+        item_price.textContent=collection_details[tag].new_price;
+        slick_slide.appendChild(item_price);
+
+        if(collection_details[tag].collection==='new'){
+            const new_icon = document.createElement("img");
+            new_icon.className="new-icon";
+            new_icon.src='images/new-icon.jpg';
+            slick_slide.appendChild(new_icon);
+        }                                
+    }
+    container_presentation.appendChild(snickers_container); 
+}
+
+//create an array consisting of objects (ID - price)
+let priceMap = [];
+for (key in collection_details){
+    let a = {};
+    a.id = key;
+    a.price = collection_details[key].new_price
+    priceMap.push(a)
+}
+//sort the array in ascending order of price
+priceMap.sort((a, b) => a.price - b.price)
+
+new_collection_details_by_price={};
+
+priceMap.forEach((pair)=>{
+    new_collection_details_by_price[pair.id]=collection_details[pair.id];    
+})
+console.log(priceMap);
+console.log(new_collection_details_by_price);
+
+dropdown_button_sorted_by_price.addEventListener('click', ()=>{
+    container_presentation.innerHTML='';
+    presentation_by_sorting(new_collection_details_by_price);
+})
+
+
 
 
 // -----------------------------CHECKBOXES-------------------------------------------------------------------------
@@ -379,9 +466,7 @@ women_list.addEventListener('click', ()=>{
 
             const firm_tag = e.target.textContent;
             const firm_tag_collection = busket_collection[firm_tag];
-            let main_collection_tag = Object.keys(collection_details); // collection of ALL catalog numbers of the ENTIRE store
-
-            const container_slick = document.querySelector('.snickers-container');
+            let main_collection_tag = Object.keys(collection_details); // collection of ALL catalog numbers of the ENTIRE store            
     
             main_collection_tag.forEach((tag)=>{
                 const temp = document.getElementsByTagName("template")[2];
@@ -721,7 +806,9 @@ home.addEventListener('click', (e)=>{
     }
 })
 
-const dropdown_button = document.querySelector('.dropdown');
+
+
+
 
 
 
