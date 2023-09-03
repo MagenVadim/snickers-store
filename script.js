@@ -197,7 +197,8 @@ main_page(collection_details) // call the function to draw the Snickers Items on
 
 // ---------------------------------------SORTING-------------------------------------------------------------
 
-const dropdown_button_sorted_by_price = document.querySelector('#by_price');
+const dropdown_button_sorted_by_price_low_high = document.querySelector('#by_price_low_high');
+const dropdown_button_sorted_by_price_high_low = document.querySelector('#by_price_high_low');
 
 
 function presentation_by_sorting(collection_details){
@@ -268,23 +269,28 @@ for (key in collection_details){
     a.price = collection_details[key].new_price
     priceMap.push(a)
 }
-//sort the array in ascending order of price
-priceMap.sort((a, b) => a.price - b.price)
 
-new_collection_details_by_price={};
-
-priceMap.forEach((pair)=>{
-    new_collection_details_by_price[pair.id]=collection_details[pair.id];    
-})
-console.log(priceMap);
-console.log(new_collection_details_by_price);
-
-dropdown_button_sorted_by_price.addEventListener('click', ()=>{
+dropdown_button_sorted_by_price_low_high.addEventListener('click', ()=>{
+    //sort the array in ascending order of price
+    priceMap.sort((a, b) => a.price - b.price)
+    new_collection_details_by_price={};
+    priceMap.forEach((pair)=>{
+        new_collection_details_by_price[pair.id]=collection_details[pair.id];    
+    })
     container_presentation.innerHTML='';
     presentation_by_sorting(new_collection_details_by_price);
 })
 
-
+dropdown_button_sorted_by_price_high_low.addEventListener('click', ()=>{
+    //sort the array in discending order of price
+    priceMap.sort((a, b) => b.price - a.price)
+    new_collection_details_by_price={};
+    priceMap.forEach((pair)=>{
+        new_collection_details_by_price[pair.id]=collection_details[pair.id];    
+    })
+    container_presentation.innerHTML='';
+    presentation_by_sorting(new_collection_details_by_price);
+})
 
 
 // -----------------------------CHECKBOXES-------------------------------------------------------------------------
