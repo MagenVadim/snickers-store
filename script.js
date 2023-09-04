@@ -60,6 +60,8 @@ const back_arrow_shipping = document.querySelector('.back-arrow-shipping');
 const close_checkout_form = document.querySelector('#close-first-step');
 const close_shipping_form = document.querySelector('#close-second-step');
 
+const price_range = document.querySelector('.price-range-wrapper');
+
 let json_catalog_number = "2023-999";
 
 let busket_collection = {
