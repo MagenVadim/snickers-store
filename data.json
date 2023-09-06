@@ -1,0 +1,51 @@
+
+{
+    "2023-999":{"new_price": 100.00, "old_price": "$130.00", "discount":"30%", 
+        "model":"Fresh Foam X 880v13","description":"Function meets performance the New Balance Fresh Foam X 880v13. Featuring a plush and supportive Fresh Foam X midsole and NDurance rubber outsole, this shoe delivers enhanced performance and comfort with each step. Complete with clean lines and simple style, this running shoe has a modern look that’s perfect for everyday use.",
+        "sex":"men", "firm":"New Balance", "style": "running", "collection": "new"
+    },
+    "2023-123":{"new_price": 200.00, "old_price": "$250.00", "discount":"20%", 
+        "model":"Cilia Lux Women's Training Trainers","description":"The bulky silhouette on these female-first sneakers provides cushioning and comfort. The new fashion trainer Cilia Lux introduces a distinctive look and practical features that are sure to 'light up' feminine footwear..",
+        "sex":"women", "firm":"Puma", "style": "basket", "collection": "summer"
+    },
+    "2023-555":{"new_price": 180.00, "old_price": "$360.00", "discount":"50%", 
+        "model":"SUPERSTAR XLG SHOES","description":"The full leather upper stays true to its vintage roots while reimagining the silhouette to keep things fresh. Take every step in confidence when the shell toe leads the way.",
+        "sex":"women", "firm":"Adidas", "style": "tennis", "collection": "new"
+    },
+    "2023-888":{"new_price": 260.00, "old_price": "$390.00", "discount":"33%", 
+        "model":"Asics Gel-Kayano 30 Anniversary","description":"Stability has never felt better. Experience a new and improved take on stability in the Asics Gel Kayano 30. Updated with an all-new, revolutionary 4D Guidance system that provides adaptive, high-level stability while maintaining reliable performance that supports runners every step of the way. From 5K to the marathon, the softest iteration of Asics Gel technology to date, the interior PureGEL technology is there to provide enhanced shock absorption, softer landings, and smoother transitions.",
+        "sex":"women", "firm":"Asics", "style": "running", "collection": "winter"
+    },
+    "2023-998":{"new_price": 260.00, "old_price": "$390.00", "discount":"33%", 
+        "model":"New Balance ML373","description":"Stability has never felt better. Experience a new and improved take on stability in the Asics Gel Kayano 30. Updated with an all-new, revolutionary 4D Guidance system that provides adaptive, high-level stability while maintaining reliable performance that supports runners every step of the way.",
+        "sex":"men", "firm":"New Balance", "style": "basket", "collection": "new"
+    },
+    "2023-997":{"new_price": 110.00, "old_price": "$150.00", "discount":"27%", 
+        "model":"NUMERIC 212 PRO COURT","description":"This is a skate-specific version of the original NB clay court tennis shoes first debuted in the 1970s. Modern additions like a dual-layer suede ollie area enhances durability. A polyurethane insert absorbs impacts and provides a consistent fit. The Pro Court 212 retains the same relaxed fit of the original with an updated construction for everyday skating.",
+        "sex":"women", "firm":"New Balance", "style": "basket", "collection": "winter"
+    },
+    "2023-996":{"new_price": 215.00, "old_price": "$320.00", "discount":"33%", 
+        "model":"M 990 WG3","description":"Probably the most famous grey sneaker on the market - the New Balance 990. But also in other colorways the sneaker is just stunning. And with its outstanding quality and timeless design you never go wrong with the classic 990.",
+        "sex":"women", "firm":"New Balance", "style": "tennis", "collection": "winter"
+    },
+    "2023-995":{"new_price": 320.00, "old_price": "$370.00", "discount":"15%", 
+        "model":"WRPD RUNNER","description":"the WRPD Runner deviates from traditional lifestyle models from New Balance as the shoe combines its newest tech with the aesthetic of futuristic designs.",
+        "sex":"men", "firm":"New Balance", "style": "basket", "collection": "new"
+    },
+    "2023-124":{"new_price": 120.00, "old_price": "$170.00", "discount":"40%", 
+        "model":"PUMA CARINA","description":"Taking its design cues from the '80s, this classic tennis silhouette feels right at home with the laid-back",
+        "sex":"men", "firm":"Puma", "style": "running", "collection": "summer"
+    },
+    "2023-125":{"new_price": 80.00, "old_price": "$160.00", "discount":"50%", 
+        "model":"Basket Classic","description":"Low leather Puma basket sneakers with laces and a classic rubber sole. The brand logo appears on the tongue, on the sides of the shoe and on the back.",
+        "sex":"women", "firm":"Puma", "style": "running", "collection": "summer"
+    },
+    "2023-556":{"new_price": 180.00, "old_price": "$220.00", "discount":"20%", 
+        "model":"ULTRABOOST 22 COLD.RDY","description":"Running shoes from Adidas and model ULTRABOOST 22 COLD.RDY 2.0 combined with laces. The shoes have 3 light-reflecting stripes, the Linear Energy Push system, a thick leather-reflecting sole and the brand logo on the tongue.",
+        "sex":"men", "firm":"Adidas", "style": "running", "collection": "new"
+    },
+    "2023-993":{"new_price": 170.00, "old_price": "$230.00", "discount":"27%", 
+        "model":"Fresh Foam X More V4 Running Shoes","description":"The most Fresh Foam used in any shoe to date, the latest in the line utilizes more Fresh Foam X, stacks it higher than ever before, and distributes it across the length of the shoe, offering a plush, yet stable underfoot experience.",
+        "sex":"women", "firm":"New Balance", "style": "running", "collection": "new"
+    }
+}
