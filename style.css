@@ -651,7 +651,7 @@ body{
     padding: 10px;
 }
 header h2{
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
   }
   header p{
@@ -690,4 +690,16 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 19px;
   align-items: center;
   justify-content: center;
+}
+.button-price-range{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.price-filter{
+    margin: auto;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
 }

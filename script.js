@@ -62,6 +62,7 @@ const close_checkout_form = document.querySelector('#close-first-step');
 const close_shipping_form = document.querySelector('#close-second-step');
 
 const price_range = document.querySelector('.price-range-wrapper');
+const buttob_price_filter = document.querySelector('.price-filter');
 
 let json_catalog_number = "2023-999";
 
