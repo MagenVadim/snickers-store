@@ -678,7 +678,6 @@ header h2{
     border-radius: 5px;
     text-align: center;
     border: 1px solid #999;
-    -moz-appearance: textfield;
   }
   input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -702,4 +701,7 @@ input[type="number"]::-webkit-inner-spin-button {
     padding: 5px;
     border-radius: 5px;
     cursor: pointer;
+}
+.range-input{
+    width: 200px;
 }
