@@ -81,12 +81,8 @@ async function generateData(){
     collection_details = JSON.stringify(collection_details);
     collection_details = JSON.parse(collection_details);
 
-
-    let main_collection_tag = Object.keys(collection_details); // collection of ALL catalog numbers of the ENTIRE store
     const container_presentation = document.querySelector('.presentation'); // The container to attach the cloned TEMPLATE to 
-    
-    
-    
+           
     // the main function that builds images of Snickers Items on the Home Page.
     function main_page(collection_details){
         for (firm in busket_collection){
@@ -256,9 +252,28 @@ async function generateData(){
     
     
     // -----------------------------CHECKBOXES-------------------------------------------------------------------------
-    const sex_men = document.querySelector('#sex-men');
-    const sex_women = document.querySelector('#sex-women');
     const checkboxes_array = document.querySelectorAll('.checkbox-button');
+    const checkbox_all = document.querySelector('#sort-0000');
+
+    // event handler for the "check all" checkbox
+    checkbox_all.addEventListener('click', () =>{
+        let status_checkbox_all = checkbox_all.checked;
+        if(status_checkbox_all===true){
+            checkboxes_array.forEach((buttonCheckbox)=>{       
+                if(buttonCheckbox.checked===false){
+                    buttonCheckbox.checked=true;
+                };
+            })  
+        }
+        if(status_checkbox_all===false){
+            checkboxes_array.forEach((buttonCheckbox)=>{       
+                if(buttonCheckbox.checked===true){
+                    buttonCheckbox.checked=false;
+                };
+            })  
+        }
+
+    })
     
     
     // function for compiling an array of Catalog Numbers of all Snickers Items corresponding to the Input Condition of the selected Checkbox
