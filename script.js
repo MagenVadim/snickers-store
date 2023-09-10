@@ -45,7 +45,10 @@ const icon_close = document.querySelector('.icon-close');
 const arrow_previous= document.querySelector('.icon-arrow.previous');
 const arrow_next= document.querySelector('.icon-arrow.next');
 
+const men_list = document.querySelector('#men');
 const women_list = document.querySelector('#women');
+const products = document.querySelector('#products');
+
 const list_items = document.querySelector('.list-items');
 const list_parent = document.querySelector('.list-parent');
 const ul_List = document.querySelector(".list-items");
@@ -420,9 +423,19 @@ async function generateData(){
     get_catalog_firm_name(busket_collection);
     
     
-    
-    // list of names of Snickers Items - when "clicking" on one of them, we get the "Catalog number" of the corresponding position, which we pass to the called function.
+    men_list.addEventListener('click', ()=>{
+        container_presentation.innerHTML='';
+        checkbox_sex('men');
+    })
+
     women_list.addEventListener('click', ()=>{
+        container_presentation.innerHTML='';
+        checkbox_sex('women');
+    })
+
+
+    // list of names of Snickers Items - when "clicking" on one of them, we get the "Catalog number" of the corresponding position, which we pass to the called function.
+    products.addEventListener('click', ()=>{
         list_parent.classList.toggle("hidden"); // раскрываем список
     
         ul_List.addEventListener('mouseover', (e)=>{
@@ -739,6 +752,7 @@ async function generateData(){
     
     
     start_home.addEventListener('click', ()=>{
+        container_presentation.innerHTML='';
         disable_all_checkboxes();  //******************************************************************************
         let b = main_page(collection_details);
         console.log(b);
@@ -751,6 +765,7 @@ async function generateData(){
             let b = main_page(collection_details);
             move_to_detailes(b);
         }
+
     })
     
     //   NAVIGATION BUTTONS for "CHECKOUT" (inside "Cart")
