@@ -441,7 +441,7 @@ async function generateData(){
         ul_List.addEventListener('mouseover', (e)=>{
             let key_name=e.target.closest('.firm-name').textContent;
             //json_catalog_number = busket_collection[key_name];
-            console.log(key_name)
+            // console.log(key_name)
             if(typeof json_catalog_number==="string"){
                 set_inside_image(json_catalog_number);
                 set_image(json_catalog_number);
@@ -453,37 +453,20 @@ async function generateData(){
         ul_List.addEventListener('click', (e)=>{
             let key_name=e.target.closest('.firm-name').textContent;
             json_catalog_number = busket_collection[key_name];
-    
-            //  If the firm has more than 1 item
-            if(json_catalog_number.length>1 && typeof json_catalog_number==="object"){
-                main.classList.toggle("hidden");
-                home.classList.toggle("hidden");
-                e.target.closest('.list-parent').classList.toggle("hidden");
-    
-                const firm_tag = e.target.textContent;
-                const firm_tag_collection = busket_collection[firm_tag];
-                let main_collection_tag = Object.keys(collection_details); // collection of ALL catalog numbers of the ENTIRE store            
-        
-                main_collection_tag.forEach((tag)=>{
-                    const temp = document.getElementsByTagName("template")[2];
-                    const clone = temp.content.cloneNode(true);
-                    const slick_slide=clone.querySelector(".slick-slide");
-                    const nextSlickImage = clone.querySelector(".slick-slide .image-present");
-                    const nextSlickPrice = clone.querySelector(".slick-slide .item-price");
-                    const nextSlickName = clone.querySelector(".slick-slide .item-name");
-    
-                    slick_slide.getAttributeNode('id').nodeValue=tag; // pass in ID - item catalog number
-                    nextSlickImage.getAttributeNode('src').nodeValue=`images/${tag}-image-product-1.jpg`;
-                    nextSlickPrice.innerText=collection_details[tag].new_price;
-                    nextSlickName.innerText=collection_details[tag].model;
-                                
-                    container_slick.appendChild(clone);
-                })
+
+            container_presentation.innerHTML='';
+            list_parent.classList.toggle("hidden");
+
+            let new_collection_details = {};
+            for (key in collection_details){
+
+                if (collection_details[key].firm===key_name){
+                    console.log(collection_details[key].firm)
+                    new_collection_details[key]=collection_details[key];
+                }                            
             }
-    
-            else if(e.target.closest('.list-parent').className=='list-parent') {
-                e.target.closest('.list-parent').classList.toggle("hidden"); 
-            }        
+            console.log(new_collection_details)          
+            main_page(new_collection_details);      
         })
     })
     
