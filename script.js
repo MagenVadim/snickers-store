@@ -454,18 +454,18 @@ async function generateData(){
             let key_name=e.target.closest('.firm-name').textContent;
             json_catalog_number = busket_collection[key_name];
 
-            container_presentation.innerHTML='';
-            list_parent.classList.toggle("hidden");
-
+            if(list_parent.className=="list-parent"){
+                console.log(list_parent.className);
+                list_parent.classList.toggle("hidden");
+            }
+            
+            container_presentation.innerHTML='';           
             let new_collection_details = {};
             for (key in collection_details){
-
-                if (collection_details[key].firm===key_name){
-                    console.log(collection_details[key].firm)
+                if (collection_details[key].firm===key_name){                    
                     new_collection_details[key]=collection_details[key];
                 }                            
-            }
-            console.log(new_collection_details)          
+            }        
             main_page(new_collection_details);      
         })
     })
