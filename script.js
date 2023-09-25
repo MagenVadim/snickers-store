@@ -627,7 +627,7 @@ async function generateData(){
         
     })
     
-    // hide the "Women List" Modal window if the "click" happened outside of the modal window.
+    // hide the "Products List" Modal window if the "click" happened outside of the modal window.
     list_parent.addEventListener('click', (e)=>{
         const click = e.composedPath().includes(list_items);
         if (!click) {
@@ -635,6 +635,20 @@ async function generateData(){
         }
     
     })
+
+
+    const background_item_image = document.querySelector('.front-main-image');
+    background_item_image.addEventListener('click', (e)=>{
+        const frame_inside_image = document.querySelector('inside-main-image');
+
+        const click = e.composedPath().includes(frame_inside_image);
+        if (!click) {
+            console.log("click");
+            background_item_image.toggle("hidden");
+        }
+    
+    })
+
     
     // function - event handler (listen to "Delete" button)
     function delete_from_basket(){    
