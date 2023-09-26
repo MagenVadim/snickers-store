@@ -413,9 +413,10 @@ async function generateData(){
     // a function for processing a JSON variable with a collection of Snickers Items and adding them to the "Dropdown list" (Nav-bar) by cloning the "template"
     function get_catalog_firm_name(busket_collection){
         for (firm in busket_collection){
-            const temp = document.getElementsByTagName("template")[0];
+            const temp = document.getElementsByTagName("template")[1];
             const clone = temp.content.cloneNode(true);
             const nextLi = clone.querySelector(".firm-name");
+            console.log("firm: " + firm);
             nextLi.innerText=firm;        
             ul_List.appendChild(clone);
         }    
@@ -587,7 +588,7 @@ async function generateData(){
     
     
     function clone_node_to_basket(id_item){  
-        const temp = document.getElementsByTagName("template")[1]; // create a variable with the selector of the appropriate template-Template. 
+        const temp = document.getElementsByTagName("template")[0]; // create a variable with the selector of the appropriate template-Template. 
         const clone = temp.content.cloneNode(true); // clones the entire Template structure
         // 1st element - String (Price-Quantity-Value)
         const formula = clone.querySelector('.detail-price');  // 1st of template elements-Template (Price-Quantity-Value)

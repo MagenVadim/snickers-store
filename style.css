@@ -21,7 +21,7 @@ body{
     display: flex;
     justify-content: center;   
 }
-.container{
+.container{    
     margin: 50px;
     width: 1100px;
 }
@@ -487,9 +487,7 @@ body{
      /* CART MODAL BACKGROUND */
 .cart-parent{
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    z-index: 6;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0,0,0,0.7); /* цвет фона - прозрачный черный */

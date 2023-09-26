@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">    
 </head>
 <body>    
-        <!-- MODAL WINDOW -->
+        <!-- MODAL WINDOW for front-main-image-->
     <div class="front-main-image hidden">
         <img class="inside-main-image" src="images/image-product-1.jpg" alt="image">
         <img  class="icon-close" src="images/icon-close.svg" alt="icon-close">
@@ -19,6 +19,101 @@
             <img src="images/icon-next.svg" alt="icon">
         </div>
     </div> 
+
+        <!-- MODAL WINDOW for cart-icon-->
+    <div class="cart-parent hidden">
+        <div class="popup_parent">
+
+            <div class="navigation-checkout first-step">    
+                <div class="close-shipping-form" id="close-first-step">
+                    <img  class="icon-close-shipping" src="images/icon-close.svg" alt="icon-close">
+                </div>
+            </div>
+
+            <div class="popup">
+                <p class="cart">Cart</p>
+                <p class="total-sum">Total Sum 
+                    <strong class="strong-total-sum"> $0.00</strong>
+                </p>
+                                      
+            </div>    
+            <hr>                 
+            <div class="empty-cart">
+                <p class="cart-containt-empty">Your cart is empty.</p>
+            </div>
+            <div id="cart-description" class="cart-description hidden">   
+                <div class="basket-item-list">
+
+                </div>
+                <div class="checkout-button">
+                    <form>
+                        <button type=button class="checkout">Checkout</button>
+                    </form>
+                </div>
+
+                <!-- ВЫБРАННАЯ И ДОБАВЛЕННАЯ ПОЗИЦИЯ В КОРЗИНУ  -->
+                <template>
+                    <div class="cart-containt-full" id="">
+                        <div>
+                            <img src="images/image-product-1-thumbnail.jpg" alt="thumbnail" class="item-image">
+                        </div>
+                        <div class="item">
+                            <p class="title-selected-item">Fall Limited Edition Sneakers</p>
+                            <p class="detail-price">$125.00 x 3 <strong> $375.00</strong></p>
+                        </div>
+                        <div class="delete-icon">
+                            <img src="images/icon-delete.svg" class="basket-icon-delete" alt="delete">
+                        </div>                            
+                    </div>
+                </template>
+            </div>
+
+        </div>
+
+        <!-- окно-форма для "SHIPPING" -->
+        <div class="checkout-form hidden">
+            <div class="navigation-checkout">
+                <div class="back-arrow-shipping">
+                    <img  class="icon-arrow-shipping" src="images/icon-arrow-left.svg" alt="icon-close">
+                </div>
+
+                <div class="close-shipping-form" id="close-second-step">
+                    <img  class="icon-close-shipping" src="images/icon-close.svg" alt="icon-close">
+                </div>
+            </div>
+
+
+            <div class="shipping-address checkout-design">
+                <h3 class="checkout-header">Shipping address</h3>
+                <p class="client-name">Vadym Smahin</p>
+                <p>+972 52 9348987</p>
+                <p>st Herzel 96/6, ap 8</p>
+                <p>Haifa</p>
+                <p class="state">Israel, 3317402
+                     <a href="#">Change address</a>
+                </p>
+            </div>
+            <div class="payment-method checkout-design">
+                <h3 class="checkout-header">Payment method</h3>
+
+                <form class="form-design" onsubmit="return false">                                             
+                    <label>                                        
+                        <input type="radio" name="flexRadio">
+                        Add a new card
+                    </label>
+                    <label>                                      
+                        <input type="radio" name="flexRadio">
+                        PayPal
+                    </label>         
+                </form>   
+            </div>
+
+            <div class="back-checkout-form">
+
+            </div>
+        </div>
+    </div>
+
 
     <!-- LEFT-SIDE BAR (CHECKBOXES)-->
     <div class="left-side-bar">
@@ -153,98 +248,7 @@
                         <img src="images/icon-cart.svg" alt="cart">                                                         
                     </div>  
                     
-                    <div class="cart-parent hidden">
-                        <div class="popup_parent">
-    
-                            <div class="navigation-checkout first-step">    
-                                <div class="close-shipping-form" id="close-first-step">
-                                    <img  class="icon-close-shipping" src="images/icon-close.svg" alt="icon-close">
-                                </div>
-                            </div>
-    
-                            <div class="popup">
-                                <p class="cart">Cart</p>
-                                <p class="total-sum">Total Sum 
-                                    <strong class="strong-total-sum"> $0.00</strong>
-                                </p>
-                                                      
-                            </div>    
-                            <hr>                 
-                            <div class="empty-cart">
-                                <p class="cart-containt-empty">Your cart is empty.</p>
-                            </div>
-                            <div id="cart-description" class="cart-description hidden">   
-                                <div class="basket-item-list">
-        
-                                </div>
-                                <div class="checkout-button">
-                                    <form>
-                                        <button type=button class="checkout">Checkout</button>
-                                    </form>
-                                </div>
-        
-                                <!-- ВЫБРАННАЯ И ДОБАВЛЕННАЯ ПОЗИЦИЯ В КОРЗИНУ  -->
-                                <template>
-                                    <div class="cart-containt-full" id="">
-                                        <div>
-                                            <img src="images/image-product-1-thumbnail.jpg" alt="thumbnail" class="item-image">
-                                        </div>
-                                        <div class="item">
-                                            <p class="title-selected-item">Fall Limited Edition Sneakers</p>
-                                            <p class="detail-price">$125.00 x 3 <strong> $375.00</strong></p>
-                                        </div>
-                                        <div class="delete-icon">
-                                            <img src="images/icon-delete.svg" class="basket-icon-delete" alt="delete">
-                                        </div>                            
-                                    </div>
-                                </template>
-                            </div>
-        
-                        </div>
-    
-                        <!-- окно-форма для "SHIPPING" -->
-                        <div class="checkout-form hidden">
-                            <div class="navigation-checkout">
-                                <div class="back-arrow-shipping">
-                                    <img  class="icon-arrow-shipping" src="images/icon-arrow-left.svg" alt="icon-close">
-                                </div>
-        
-                                <div class="close-shipping-form" id="close-second-step">
-                                    <img  class="icon-close-shipping" src="images/icon-close.svg" alt="icon-close">
-                                </div>
-                            </div>
-    
-    
-                            <div class="shipping-address checkout-design">
-                                <h3 class="checkout-header">Shipping address</h3>
-                                <p class="client-name">Vadym Smahin</p>
-                                <p>+972 52 9348987</p>
-                                <p>st Herzel 96/6, ap 8</p>
-                                <p>Haifa</p>
-                                <p class="state">Israel, 3317402
-                                     <a href="#">Change address</a>
-                                </p>
-                            </div>
-                            <div class="payment-method checkout-design">
-                                <h3 class="checkout-header">Payment method</h3>
-    
-                                <form class="form-design" onsubmit="return false">                                             
-                                    <label>                                        
-                                        <input type="radio" name="flexRadio">
-                                        Add a new card
-                                    </label>
-                                    <label>                                      
-                                        <input type="radio" name="flexRadio">
-                                        PayPal
-                                    </label>         
-                                </form>   
-                            </div>
-    
-                            <div class="back-checkout-form">
-    
-                            </div>
-                        </div>
-                    </div>
+                    
     
     
                     <!-- COUNTER -->
