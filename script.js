@@ -439,16 +439,12 @@ async function generateData(){
     products.addEventListener('click', ()=>{
         list_parent.classList.toggle("hidden"); // раскрываем список
     
-        ul_List.addEventListener('mouseover', (e)=>{
-            let key_name=e.target.closest('.firm-name').textContent;
-            //json_catalog_number = busket_collection[key_name];
-            // console.log(key_name)
+        ul_List.addEventListener('mouseover', ()=>{
             if(typeof json_catalog_number==="string"){
                 set_inside_image(json_catalog_number);
                 set_image(json_catalog_number);
                 set_details(json_catalog_number);
-            }
-    
+            }    
         })
     
         ul_List.addEventListener('click', (e)=>{
@@ -783,10 +779,8 @@ async function generateData(){
         popup_parent.classList.toggle("hidden"); // display stage 1 Checkout for the next opening
         cart_parent.classList.toggle("hidden"); // hide modal window background
     })
-    
-    
-    
-    const header_dropdown = document.querySelector('image-arrow-dropdown');
+            
+    //??????? const header_dropdown = document.querySelector('image-arrow-dropdown');
     home.addEventListener('click', (e)=>{
         const header_arrow_dropdown = e.target.closest('.image-arrow-dropdown');
         const header_div = header_arrow_dropdown.parentNode;
@@ -801,7 +795,16 @@ async function generateData(){
             e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropdown.png";
         }
     })
-    
+
+    const collections = document.querySelector('#collections');
+    collections.addEventListener('click',()=>{
+        let list_name_collection =[]
+        for (tag in collection_details){
+            let next_name_collection = collection_details[tag].collection;
+            list_name_collection.push(next_name_collection)            
+        }
+        console.log(list_name_collection);
+    })   
    
 }
 

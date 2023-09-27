@@ -36,7 +36,7 @@ body{
 
 .nav-bar{
     display: flex;
-    align-items: flex-start;
+    align-items: center;    
     height: 70px;
     padding: 50px;
 }
@@ -443,14 +443,13 @@ body{
 
 /* NAVIGATION BAR */
 .nav-section{
+    display: flex;
+    align-items: center;
     cursor: pointer;
-    /* margin-bottom: 3rem; */
     min-height: 65px;
 }
 .underline{
-    display: none;
     height: 5px;
-    background-color: var(--Orange);
     border: none;
     margin-bottom: auto;
 }
@@ -463,8 +462,8 @@ body{
 .long-line{
     margin-top: 0;
 }
-.nav-section:hover + .underline{
-    display: flex;
+.nav-section:hover + .underline{    
+    background-color: var(--Orange);
 }
 .list-items{
     position: absolute;
