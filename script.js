@@ -780,7 +780,7 @@ async function generateData(){
         cart_parent.classList.toggle("hidden"); // hide modal window background
     })
             
-    //??????? const header_dropdown = document.querySelector('image-arrow-dropdown');
+    // const header_dropdown = document.querySelector('image-arrow-dropdown');
     home.addEventListener('click', (e)=>{
         const header_arrow_dropdown = e.target.closest('.image-arrow-dropdown');
         const header_div = header_arrow_dropdown.parentNode;

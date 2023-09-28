@@ -19,11 +19,13 @@
 body{
     min-height: 100vh;  
     display: flex;
-    justify-content: center;   
+    justify-content: center;  
+    overflow: hidden;
 }
 .container{    
     margin: 50px;
     width: 1100px;
+    
 }
 
 .navigation-panel{
@@ -502,14 +504,17 @@ body{
     background-color: rgba(0,0,0,0.7); /* цвет фона - прозрачный черный */    
 }
 /* HOME PAGE - MAIN PRESENTATION BAR */
+
 .presentation{
     position: fixed;
     display: flex;
+    height: 100%;
+    width: auto;
     flex-direction: column;
     margin-top: 50px;    
     background-color: azure;
-    z-index: 3;
-    
+    z-index: 3;    
+    overflow: scroll;
 }
 .snickers-container{
     display: flex;
@@ -525,6 +530,7 @@ body{
     gap: 20px;
     justify-content: left;
     margin-left: 20px;
+    margin-right: 20px;
 }
 .image-present{
     height: 200px;
