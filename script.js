@@ -628,7 +628,8 @@ async function generateData(){
     list_parent.addEventListener('click', (e)=>{
         const click = e.composedPath().includes(list_items);
         if (!click) {
-            list_parent.classList.toggle("hidden");
+            console.log(list_parent.className);
+            list_parent.classList.toggle("hidden");            
         }
     
     })
@@ -796,9 +797,13 @@ async function generateData(){
         }
     })
 
+
+    // Operations with "Collections" nav-bar sections.
     const collections = document.querySelector('#collections');
-    collections.addEventListener('click',()=>{
-        const collection_list = document.querySelector('.collection-list');
+    const collection_list = document.querySelector('.collection-list');
+    const collection_list_items = document.querySelector('.collection-list-items');
+
+    collections.addEventListener('click',()=>{        
         let list_name_collection =[]
         for (tag in collection_details){
             let next_name_collection = collection_details[tag].collection;
@@ -807,6 +812,14 @@ async function generateData(){
         console.log(list_name_collection);
         collection_list.classList.toggle("hidden");
     })   
+
+    // hide the "Collections" Modal window if the "click" occurred outside of the modal window.
+    collection_list.addEventListener('click', (e)=>{
+        const click = e.composedPath().includes(collection_list_items);
+        if (!click){
+            collection_list.classList.toggle("hidden");
+        }         
+    })
    
 }
 
