@@ -798,12 +798,14 @@ async function generateData(){
 
     const collections = document.querySelector('#collections');
     collections.addEventListener('click',()=>{
+        const collection_list = document.querySelector('.collection-list');
         let list_name_collection =[]
         for (tag in collection_details){
             let next_name_collection = collection_details[tag].collection;
             list_name_collection.push(next_name_collection)            
         }
         console.log(list_name_collection);
+        collection_list.classList.toggle("hidden");
     })   
    
 }

@@ -467,7 +467,7 @@ body{
 .nav-section:hover + .underline{    
     background-color: var(--Orange);
 }
-.list-items{
+.list-items, .collection-list-items{
     position: absolute;
     top: 80px;
     left: 820px;
@@ -475,7 +475,8 @@ body{
     gap: 2rem;
     border-radius: 10px;
 }
-.firm-name{
+
+.firm-name, .collection-name{
     /* margin-bottom: 1rem; */
     list-style-type: none;
     cursor: pointer;
@@ -493,7 +494,7 @@ body{
     height: 100vh;
     background-color: rgba(0,0,0,0.7); /* цвет фона - прозрачный черный */
 }
-.list-parent{
+.list-parent, .collection-list{
     position: fixed;
     z-index: 1;
     top: 50%;
@@ -503,13 +504,14 @@ body{
     height: 100vh;
     background-color: rgba(0,0,0,0.7); /* цвет фона - прозрачный черный */    
 }
+
 /* HOME PAGE - MAIN PRESENTATION BAR */
 
 .presentation{
     position: fixed;
     display: flex;
     height: 100%;
-    width: auto;
+    width: 1500px;
     flex-direction: column;
     margin-top: 50px;    
     background-color: azure;
