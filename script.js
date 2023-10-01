@@ -781,21 +781,23 @@ async function generateData(){
         cart_parent.classList.toggle("hidden"); // hide modal window background
     })
             
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     // const header_dropdown = document.querySelector('image-arrow-dropdown');
-    home.addEventListener('click', (e)=>{
-        const header_arrow_dropdown = e.target.closest('.image-arrow-dropdown');
-        const header_div = header_arrow_dropdown.parentNode;
-        const grandParent = header_div.parentNode;
-        const sibling_slide_container = grandParent.nextElementSibling;
-        if (getComputedStyle(sibling_slide_container).display=='flex'){
-            sibling_slide_container.style.display="none";
-            e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropup.png";
-        }
-        else {
-            sibling_slide_container.style.display="flex";
-            e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropdown.png";
-        }
-    })
+    // home.addEventListener('click', (e)=>{
+    //     const header_arrow_dropdown = e.target.closest('.image-arrow-dropdown');
+    //     const header_div = header_arrow_dropdown.parentNode;
+    //     const grandParent = header_div.parentNode;
+    //     const sibling_slide_container = grandParent.nextElementSibling;
+    //     if (getComputedStyle(sibling_slide_container).display=='flex'){
+    //         sibling_slide_container.style.display="none";
+    //         e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropup.png";
+    //     }
+    //     else {
+    //         sibling_slide_container.style.display="flex";
+    //         e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropdown.png";
+    //     }
+    // })
 
 
     // Operations with "Collections" nav-bar sections.
@@ -829,6 +831,10 @@ async function generateData(){
     range = document.querySelector(".slider .progress");
     let priceGap = 50;
 
+    let valueInputMin=50;
+    let valueInputMax=300;
+
+
     priceInput.forEach(input =>{
         input.addEventListener("input", e =>{
             let minPrice = parseInt(priceInput[0].value),
@@ -853,7 +859,7 @@ async function generateData(){
 
             if((maxVal - minVal) < priceGap){
                 if(e.target.className === "range-min"){
-                    rangeInput[0].value = maxVal - priceGap
+                    console.log(rangeInput[0].value);
                 }else{
                     rangeInput[1].value = minVal + priceGap;
                 }
@@ -862,10 +868,24 @@ async function generateData(){
                 priceInput[1].value = maxVal;
                 range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
                 range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+
+                valueInputMin = rangeInput[0].value;
+                valueInputMax = rangeInput[1].value;
             }
         });
     });
 
+    const rangeMin = document.querySelector(".range-min");
+    const rangeMax = document.querySelector(".range-max");
+
+
+    button_price_filter.addEventListener('click', ()=>{
+        rangeMin.value = valueInputMin;
+        rangeMax.value = valueInputMax;
+        console.log(rangeMin.value);
+        console.log(rangeMax.value);
+
+    })
 }
 
 
