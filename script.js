@@ -878,14 +878,27 @@ async function generateData(){
     const rangeMin = document.querySelector(".range-min");
     const rangeMax = document.querySelector(".range-max");
 
-
     button_price_filter.addEventListener('click', ()=>{
         rangeMin.value = valueInputMin;
         rangeMax.value = valueInputMax;
-        console.log(rangeMin.value);
-        console.log(rangeMax.value);
-
+        price_range(rangeMin.value, rangeMax.value)
     })
+
+    function price_range(priceMin, priceMax){
+        let new_collection_details = {};
+        let item_price;
+        console.log("priceMin: " + priceMin + " priceMax: " + priceMax);
+        for (key in collection_details){
+            item_price = collection_details[key].new_price
+            if (item_price > priceMin && item_price < priceMax) {
+                new_collection_details[key]=collection_details[key];
+            }
+        } 
+
+        container_presentation.innerHTML='';
+        presentation_by_sorting(new_collection_details); 
+    }
+
 }
 
 
