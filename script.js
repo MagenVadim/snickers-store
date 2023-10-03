@@ -832,7 +832,7 @@ async function generateData(){
     let priceGap = 50;
 
     let valueInputMin=50;
-    let valueInputMax=300;
+    let valueInputMax=500;
 
 
     priceInput.forEach(input =>{
@@ -879,15 +879,14 @@ async function generateData(){
     const rangeMax = document.querySelector(".range-max");
 
     button_price_filter.addEventListener('click', ()=>{
-        rangeMin.value = valueInputMin;
-        rangeMax.value = valueInputMax;
-        price_range(rangeMin.value, rangeMax.value)
+        valueInputMin = rangeInput[0].value;
+        valueInputMax = rangeInput[1].value;
+        price_range(valueInputMin, valueInputMax)
     })
 
     function price_range(priceMin, priceMax){
         let new_collection_details = {};
         let item_price;
-        console.log("priceMin: " + priceMin + " priceMax: " + priceMax);
         for (key in collection_details){
             item_price = collection_details[key].new_price
             if (item_price > priceMin && item_price < priceMax) {
