@@ -133,10 +133,15 @@ async function generateData(){
                     style.className="style-name";
                     style.textContent=`style: ${collection_details[tag].style}`;
                     slick_slide.appendChild(style);
+
+                    const collection_tag = document.createElement("p");
+                    collection_tag.className="collection-tag";
+                    collection_tag.textContent=`collection: ${collection_details[tag].collection}`;
+                    slick_slide.appendChild(collection_tag);
     
                     const item_price = document.createElement("p");
                     item_price.className="item-price";
-                    item_price.textContent=collection_details[tag].new_price;
+                    item_price.textContent=`${collection_details[tag].new_price}` + ' $';
                     slick_slide.appendChild(item_price);
     
                     if(collection_details[tag].collection==='new'){
