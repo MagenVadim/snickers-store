@@ -647,12 +647,12 @@ async function generateData(){
 
     const background_item_image = document.querySelector('.front-main-image');
     background_item_image.addEventListener('click', (e)=>{
-        const frame_inside_image = document.querySelector('inside-main-image');
+        const frame_inside_image = document.querySelector('.inside-main-image');
 
         const click = e.composedPath().includes(frame_inside_image);
         if (!click) {
-            console.log("click");
-            background_item_image.toggle("hidden");
+            console.log(background_item_image.className);        
+            background_item_image.style.display ="none";
         }
     
     })
