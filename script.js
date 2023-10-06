@@ -649,12 +649,13 @@ async function generateData(){
     background_item_image.addEventListener('click', (e)=>{
         const frame_inside_image = document.querySelector('.inside-main-image');
 
-        const click = e.composedPath().includes(frame_inside_image);
-        if (!click) {
-            console.log(background_item_image.className);        
+        const click_frame_inside = e.composedPath().includes(frame_inside_image);
+        const click_arrow_previous = e.composedPath().includes(arrow_previous);
+        const click_arrow_next = e.composedPath().includes(arrow_next);
+        if (!click_frame_inside) {
+            if(click_arrow_previous || click_arrow_next) return;     
             background_item_image.style.display ="none";
         }
-    
     })
 
     
