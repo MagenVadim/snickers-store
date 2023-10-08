@@ -60,12 +60,18 @@ const home = document.querySelector(".home");
 const left_side_bar = document.querySelector('.left-side-bar');
 
 const start_home = document.querySelector('#start-home');
+const underline_home = document.querySelector('#start-home .underline');
+const underline_men = document.querySelector('#men + .underline');
+const underline_women = document.querySelector('#women + .underline');
+
+
 const back_arrow_shipping = document.querySelector('.back-arrow-shipping');
 const close_checkout_form = document.querySelector('#close-first-step');
 const close_shipping_form = document.querySelector('#close-second-step');
 
 const price_range = document.querySelector('.price-range-wrapper');
 const button_price_filter = document.querySelector('.price-filter');
+
 
 
 let json_catalog_number = "2023-999";
@@ -433,15 +439,34 @@ async function generateData(){
     } 
     get_catalog_firm_name(busket_collection);
     
-    
+
     men_list.addEventListener('click', ()=>{
         container_presentation.innerHTML='';
         checkbox_sex('men');
-    })
+        if(!underline_men.style.backgroundColor){
+            underline_men.style.backgroundColor="#ff4000"
+        }
+        if(underline_women.style.backgroundColor){
+            underline_women.style.backgroundColor=null;
+        }
+        if(underline_home.style.backgroundColor){
+            underline_home.style.backgroundColor=null;
+        } 
 
+    })
+    
     women_list.addEventListener('click', ()=>{
         container_presentation.innerHTML='';
         checkbox_sex('women');
+        if(!underline_women.style.backgroundColor){
+            underline_women.style.backgroundColor="#ff4000"
+        }
+        if(underline_men.style.backgroundColor){
+            underline_men.style.backgroundColor=null;
+        }
+        if(underline_home.style.backgroundColor){
+            underline_home.style.backgroundColor=null;
+        } 
     })
 
 
@@ -772,6 +797,17 @@ async function generateData(){
             move_to_detailes(b);
         }
 
+        if(!underline_home.style.backgroundColor){
+            underline_home.style.backgroundColor="#ff4000"
+        }
+        if(underline_women.style.backgroundColor){
+            underline_women.style.backgroundColor=null;
+        }
+        if(underline_men.style.backgroundColor){
+            underline_men.style.backgroundColor=null;
+        }
+
+
     })
     
     //   NAVIGATION BUTTONS for "CHECKOUT" (inside "Cart")
@@ -792,23 +828,20 @@ async function generateData(){
         cart_parent.classList.toggle("hidden"); // hide modal window background
     })
             
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    // const header_dropdown = document.querySelector('image-arrow-dropdown');
-    // home.addEventListener('click', (e)=>{
-    //     const header_arrow_dropdown = e.target.closest('.image-arrow-dropdown');
-    //     const header_div = header_arrow_dropdown.parentNode;
-    //     const grandParent = header_div.parentNode;
-    //     const sibling_slide_container = grandParent.nextElementSibling;
-    //     if (getComputedStyle(sibling_slide_container).display=='flex'){
-    //         sibling_slide_container.style.display="none";
-    //         e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropup.png";
-    //     }
-    //     else {
-    //         sibling_slide_container.style.display="flex";
-    //         e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropdown.png";
-    //     }
-    // })
+    home.addEventListener('click', (e)=>{
+        const header_arrow_dropdown = e.target.closest('.image-arrow-dropdown');
+        const header_div = header_arrow_dropdown.parentNode;
+        const grandParent = header_div.parentNode;
+        const sibling_slide_container = grandParent.nextElementSibling;
+        if (getComputedStyle(sibling_slide_container).display=='flex'){
+            sibling_slide_container.style.display="none";
+            e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropup.png";
+        }
+        else {
+            sibling_slide_container.style.display="flex";
+            e.target.getAttributeNode("src").nodeValue = "images/image-arrow-dropdown.png";
+        }
+    })
 
 
     // Operations with "Collections" nav-bar sections.
