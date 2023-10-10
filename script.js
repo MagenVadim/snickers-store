@@ -48,6 +48,7 @@ const arrow_next= document.querySelector('.icon-arrow.next');
 const men_list = document.querySelector('#men');
 const women_list = document.querySelector('#women');
 const products = document.querySelector('#products');
+let sex_status;
 
 const list_items = document.querySelector('.list-items');
 const list_parent = document.querySelector('.list-parent');
@@ -63,7 +64,6 @@ const start_home = document.querySelector('#start-home');
 const underline_home = document.querySelector('#start-home .underline');
 const underline_men = document.querySelector('#men + .underline');
 const underline_women = document.querySelector('#women + .underline');
-
 
 const back_arrow_shipping = document.querySelector('.back-arrow-shipping');
 const close_checkout_form = document.querySelector('#close-first-step');
@@ -83,9 +83,12 @@ let busket_collection = {
     "Asics":["2023-888"],
 };
 
+let filtred_collection = [];
 
 
 async function generateData(){
+    console.log(filtred_collection);
+
     let collection_details = await fetch("/data.json").then((response) => response.json());
     collection_details = JSON.stringify(collection_details);
     collection_details = JSON.parse(collection_details);
@@ -297,18 +300,20 @@ async function generateData(){
     
     // function for compiling an array of Catalog Numbers of all Snickers Items corresponding to the Input Condition of the selected Checkbox
     function checkbox_sex(income_sex){
-        let new_collection_details = {};
+
+        filtred_collection=[];
+
         for (key in collection_details){
             if(income_sex==collection_details[key].sex){  
                 container_presentation.innerHTML='';          
-                new_collection_details[key]=collection_details[key];
+                filtred_collection[key]=collection_details[key];
             } 
         }  
     
-        let b = main_page(new_collection_details); // array containing all icons of all Snickers Items of the Home page.
+        let b = main_page(filtred_collection); // array containing all icons of all Snickers Items of the Home page.
         move_to_detailes(b); 
         
-        return new_collection_details;    
+        return filtred_collection;    
     }
     
     // the function checks the state of all checkboxes, and if:
@@ -328,74 +333,67 @@ async function generateData(){
                 ch_box_values_list.push(buttonCheckbox.value) // the function adds the values of checked checkboxes to the array.  
             };       
         })        
-       
-        // firstly, check if one of conditions  is selected ('men'/'women'), and add to new array ("new_collect") all Snickers items to match to this criterion.
+        
+        // firstly, check if one of conditions is selected ('men'/'women'), and add to new array ("new_collect") all Snickers items to match to this criterion.
         if(ch_box_values_list.length>0){
-            if(ch_box_values_list.includes('men') || ch_box_values_list.includes('women')){
-                if (ch_box_values_list.includes('men') && ch_box_values_list.includes('women') && ch_box_values_list.length>2) new_collect=collection_details;
-                else {
-                    ch_box_values_list.forEach((sex)=>{
-                        if(sex=='men') new_collect = checkbox_sex('men');
-                        if(sex=='women') new_collect = checkbox_sex('women');
-                    })
+            if (sex_status=="men" || sex_status=="women"){
+                new_collect = filtred_collection;
+            } 
+    
+            if(ch_box_values_list.includes('running') || ch_box_values_list.includes('basket') || ch_box_values_list.includes('tennis')) {
+                for (key in new_collect){
+                    let item_style = collection_details[key].style;            
+        
+                    ch_box_values_list.forEach((val)=>{                    
+                        // add in "array_key_styles" the each "style value" if they checked, for passing in "main_page()" function
+                        if(val==item_style){
+                        array_key_styles.push(key);
+                        } 
+                    })          
                 }
+        
+                array_key_styles.forEach((key)=>{            
+                    new_collection_details[key]=collection_details[key];            
+                })
+        
+                container_presentation.innerHTML='';        
+                main_page(new_collection_details);
             }
-    
-        if(ch_box_values_list.includes('running') || ch_box_values_list.includes('basket') || ch_box_values_list.includes('tennis')) {
-            for (key in new_collect){
-                let item_style = collection_details[key].style;            
-    
-                ch_box_values_list.forEach((val)=>{                    
-                    // add in "array_key_styles" the each "style value" if they checked, for passing in "main_page()" function
-                    if(val==item_style){
-                    array_key_styles.push(key);
-                    } 
-                })          
-            }
-    
-            array_key_styles.forEach((key)=>{            
-                new_collection_details[key]=collection_details[key];            
-            })
-    
-            container_presentation.innerHTML='';        
-            main_page(new_collection_details);
-        }
     
         
-        if(ch_box_values_list.includes('latest')){
-    
-            // if one or more of the checkbox styles (running/basket/tennis) is checked 
-            if(Object.keys(new_collection_details).length>0){
-    
-                array_key_styles=[];
-                for (key in new_collection_details){
-                    let collection_name = new_collection_details[key].collection; 
-                    if(collection_name=='new')array_key_styles.push(key);               
+            if(ch_box_values_list.includes('latest')){
+        
+                // if one or more of the checkbox styles (running/basket/tennis) is checked 
+                if(Object.keys(new_collection_details).length>0){
+        
+                    array_key_styles=[];
+                    for (key in new_collection_details){
+                        let collection_name = new_collection_details[key].collection; 
+                        if(collection_name=='New')array_key_styles.push(key);               
+                    }
+        
+                    new_collection_details={};
+                    array_key_styles.forEach((key)=>{            
+                        new_collection_details[key]=collection_details[key];            
+                    })
+                    container_presentation.innerHTML='';
+                    main_page(new_collection_details);
                 }
-    
-                new_collection_details={};
-                array_key_styles.forEach((key)=>{            
-                    new_collection_details[key]=collection_details[key];            
-                })
-                container_presentation.innerHTML='';
-                main_page(new_collection_details);
+        
+                // (in other cases (when male/female gender checkbox is selected) or nothing is selected)
+                else {
+                    for (key in new_collect){
+                        let collection_name = new_collect[key].collection;                
+                        if(collection_name=='New')array_key_styles.push(key);      
+                    }
+                    array_key_styles.forEach((key)=>{            
+                        new_collection_details[key]=collection_details[key];            
+                    })
+                    container_presentation.innerHTML='';
+                    main_page(new_collection_details);
+                }        
             }
-    
-            // (in other cases (when male/female gender checkbox is selected) or nothing is selected)
-            else {
-                for (key in new_collect){
-                    let collection_name = new_collect[key].collection;                
-                    if(collection_name=='new')array_key_styles.push(key);      
-                }
-                array_key_styles.forEach((key)=>{            
-                    new_collection_details[key]=collection_details[key];            
-                })
-                container_presentation.innerHTML='';
-                main_page(new_collection_details);
-            }        
-        }
-    }
-    
+        }    
     
         // condition when both checkbockes are checked ('men'/'women')
         if (ch_bx_true==0 || (ch_box_values_list.includes('men') && ch_box_values_list.includes('women') && ch_box_values_list.length==2) ) {
@@ -441,10 +439,20 @@ async function generateData(){
     
 
     men_list.addEventListener('click', ()=>{
+        sex_status= "men";
+        filtred_collection=[];
+        
+        for (key in collection_details){
+            if(collection_details[key].sex==='men') filtred_collection[key]=collection_details[key];            
+        }
+        console.log(filtred_collection);
+
+        checkbox_status();
         container_presentation.innerHTML='';
         checkbox_sex('men');
+
         if(!underline_men.style.backgroundColor){
-            underline_men.style.backgroundColor="#ff4000"
+            underline_men.style.backgroundColor="#fc701c"
         }
         if(underline_women.style.backgroundColor){
             underline_women.style.backgroundColor=null;
@@ -456,10 +464,20 @@ async function generateData(){
     })
     
     women_list.addEventListener('click', ()=>{
+        sex_status="women";
+        filtred_collection=[];
+
+        for (key in collection_details){
+            if(collection_details[key].sex==='women') filtred_collection[key]=collection_details[key];            
+        }
+        console.log(filtred_collection);
+
+        checkbox_status();
         container_presentation.innerHTML='';
         checkbox_sex('women');
+
         if(!underline_women.style.backgroundColor){
-            underline_women.style.backgroundColor="#ff4000"
+            underline_women.style.backgroundColor="#fc701c"
         }
         if(underline_men.style.backgroundColor){
             underline_men.style.backgroundColor=null;
@@ -472,7 +490,17 @@ async function generateData(){
 
     // list of names of Snickers Items - when "clicking" on one of them, we get the "Catalog number" of the corresponding position, which we pass to the called function.
     products.addEventListener('click', ()=>{
-        list_parent.classList.toggle("hidden"); // раскрываем список
+        if(underline_home.style.backgroundColor){
+            underline_home.style.backgroundColor=null;
+        }      
+        if(underline_women.style.backgroundColor){
+            underline_women.style.backgroundColor=null;
+        }
+        if(underline_men.style.backgroundColor){
+            underline_men.style.backgroundColor=null;
+        }
+
+        list_parent.classList.toggle("hidden"); // expand the list
     
         ul_List.addEventListener('mouseover', ()=>{
             if(typeof json_catalog_number==="string"){
@@ -497,7 +525,7 @@ async function generateData(){
                 if (collection_details[key].firm===key_name){                    
                     new_collection_details[key]=collection_details[key];
                 }                            
-            }        
+            }  
             main_page(new_collection_details);      
         })
     })
@@ -849,7 +877,17 @@ async function generateData(){
     const collection_list = document.querySelector('.collection-list');
     const collection_list_items = document.querySelector('.collection-list-items');
 
-    collections.addEventListener('click',()=>{        
+    collections.addEventListener('click',()=>{ 
+        if(underline_home.style.backgroundColor){
+            underline_home.style.backgroundColor=null;
+        }      
+        if(underline_women.style.backgroundColor){
+            underline_women.style.backgroundColor=null;
+        }
+        if(underline_men.style.backgroundColor){
+            underline_men.style.backgroundColor=null;
+        }
+
         let list_name_collection =[]
         for (tag in collection_details){
             let next_name_collection = collection_details[tag].collection;
