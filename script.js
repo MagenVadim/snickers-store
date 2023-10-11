@@ -71,7 +71,7 @@ const close_shipping_form = document.querySelector('#close-second-step');
 
 const price_range = document.querySelector('.price-range-wrapper');
 const button_price_filter = document.querySelector('.price-filter');
-
+let ch_box_values_list=[];
 
 
 let json_catalog_number = "2023-999";
@@ -87,8 +87,7 @@ let filtred_collection = [];
 
 
 async function generateData(){
-    console.log(filtred_collection);
-
+    
     let collection_details = await fetch("/data.json").then((response) => response.json());
     collection_details = JSON.stringify(collection_details);
     collection_details = JSON.parse(collection_details);
@@ -279,15 +278,14 @@ async function generateData(){
 
     // event handler for the "check all" checkbox
     checkbox_all.addEventListener('click', () =>{
-        let status_checkbox_all = checkbox_all.checked;
-        if(status_checkbox_all===true){
+        if(checkbox_all.checked){
             checkboxes_array.forEach((buttonCheckbox)=>{       
                 if(buttonCheckbox.checked===false){
                     buttonCheckbox.checked=true;
                 };
             })  
         }
-        if(status_checkbox_all===false){
+        if(!checkbox_all.checked){
             checkboxes_array.forEach((buttonCheckbox)=>{       
                 if(buttonCheckbox.checked===true){
                     buttonCheckbox.checked=false;
@@ -322,7 +320,7 @@ async function generateData(){
     
     function checkbox_status(){
         let ch_bx_true = 0;
-        let ch_box_values_list=[];    
+        ch_box_values_list = [];   
         let array_key_styles = [];
         let new_collect = collection_details;
         let new_collection_details = {};
@@ -464,6 +462,7 @@ async function generateData(){
     })
     
     women_list.addEventListener('click', ()=>{
+        console.log();
         sex_status="women";
         filtred_collection=[];
 
@@ -472,9 +471,16 @@ async function generateData(){
         }
         console.log(filtred_collection);
 
-        checkbox_status();
-        container_presentation.innerHTML='';
-        checkbox_sex('women');
+        
+
+        if(ch_box_values_list.length==0){
+            container_presentation.innerHTML='';
+            checkbox_sex('women');
+        }
+        else{
+            checkbox_status();
+        }
+
 
         if(!underline_women.style.backgroundColor){
             underline_women.style.backgroundColor="#fc701c"
@@ -974,10 +980,15 @@ rangeInput.forEach(input =>{
     function price_range(priceMin, priceMax){
         let new_collection_details = {};
         let item_price;
-        for (key in collection_details){
-            item_price = collection_details[key].new_price
+
+        if (sex_status=="men" || sex_status=="women"){
+            new_collect = filtred_collection;
+        } 
+
+        for (key in new_collect){
+            item_price = new_collect[key].new_price
             if (item_price > priceMin && item_price < priceMax) {
-                new_collection_details[key]=collection_details[key];
+                new_collection_details[key]=new_collect[key];
             }
         } 
 
