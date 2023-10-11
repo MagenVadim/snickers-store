@@ -72,7 +72,7 @@ const close_shipping_form = document.querySelector('#close-second-step');
 const price_range = document.querySelector('.price-range-wrapper');
 const button_price_filter = document.querySelector('.price-filter');
 let ch_box_values_list=[];
-
+let new_collection_details = {};
 
 let json_catalog_number = "2023-999";
 
@@ -323,7 +323,7 @@ async function generateData(){
         ch_box_values_list = [];   
         let array_key_styles = [];
         let new_collect = collection_details;
-        let new_collection_details = {};
+        new_collection_details = [];
     
         checkboxes_array.forEach((buttonCheckbox)=>{       
             if(buttonCheckbox.checked===true){
@@ -356,6 +356,7 @@ async function generateData(){
         
                 container_presentation.innerHTML='';        
                 main_page(new_collection_details);
+                console.log(new_collection_details)
             }
     
         
@@ -397,6 +398,7 @@ async function generateData(){
         if (ch_bx_true==0 || (ch_box_values_list.includes('men') && ch_box_values_list.includes('women') && ch_box_values_list.length==2) ) {
             container_presentation.innerHTML='';
             main_page(collection_details);
+            
         }
     }
     
@@ -978,19 +980,29 @@ rangeInput.forEach(input =>{
     })
 
     function price_range(priceMin, priceMax){
-        let new_collection_details = {};
+        //let new_collection_details = {};
         let item_price;
+        let new_collect = collection_details;
+
 
         if (sex_status=="men" || sex_status=="women"){
             new_collect = filtred_collection;
-        } 
-
-        for (key in new_collect){
-            item_price = new_collect[key].new_price
-            if (item_price > priceMin && item_price < priceMax) {
-                new_collection_details[key]=new_collect[key];
+            if(!ch_box_values_list.length==0){
+                new_collect = new_collection_details;
             }
         } 
+        if(!ch_box_values_list.length==0){
+            new_collect = new_collection_details;
+        }
+        else{
+            for (key in new_collect){
+                item_price = new_collect[key].new_price
+                if (item_price > priceMin && item_price < priceMax) {
+                    new_collection_details[key]=new_collect[key];
+                }
+            } 
+        }
+
 
         container_presentation.innerHTML='';
         presentation_by_sorting(new_collection_details); 
