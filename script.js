@@ -443,7 +443,7 @@ async function generateData(){
     
 
     men_list.addEventListener('click', ()=>{
-
+        console.log(status_price_range)
         sex_status= "men";
         filtred_collection=[];
         
@@ -452,6 +452,10 @@ async function generateData(){
         }
 
         if(ch_box_values_list.length==0){
+            if(status_price_range){
+                price_range(valueInputMin, valueInputMax);
+                return;
+            } 
             container_presentation.innerHTML='';
             checkbox_sex('men');
         }
@@ -483,9 +487,8 @@ async function generateData(){
 
         if(ch_box_values_list.length==0){
             if(status_price_range){
-                console.log("filtred_collection");
-                console.log(filtred_collection);
                 price_range(valueInputMin, valueInputMax);
+                return;
             } 
             container_presentation.innerHTML='';
             checkbox_sex('women');
@@ -996,7 +999,6 @@ rangeInput.forEach(input =>{
         let item_price;
         let new_collect;
         new_collection_details={};
-        console.log(sex_status)
 
         if (sex_status=="men" || sex_status=="women"){
             new_collect = filtred_collection;            
@@ -1007,10 +1009,10 @@ rangeInput.forEach(input =>{
                 item_price = new_collect[key].new_price
                 if (item_price > priceMin && item_price < priceMax) {
                     new_collection_details[key]=new_collect[key];
-                    console.log("if men/women: ")
-                    console.log(new_collect[key])
                 }
             } 
+            console.log("if men/women: ")
+            console.log(new_collect)
         } 
         
         if(!ch_box_values_list.length==0){
@@ -1023,16 +1025,16 @@ rangeInput.forEach(input =>{
                 }
             } 
         }
-        else{
+
+        if(sex_status===undefined && ch_box_values_list.length==0){
+            console.log("sex_status: " + sex_status);
             new_collect = collection_details;
             for (key in new_collect){
                 item_price = new_collect[key].new_price
                 if (item_price > priceMin && item_price < priceMax) {
                     new_collection_details[key]=new_collect[key];
                 }
-            } 
-            console.log("else: ");
-            console.log(new_collection_details);
+            }     
         }
 
         container_presentation.innerHTML='';
