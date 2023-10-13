@@ -73,6 +73,7 @@ const price_range = document.querySelector('.price-range-wrapper');
 const button_price_filter = document.querySelector('.price-filter');
 let ch_box_values_list=[];
 let new_collection_details = {};
+let status_price_range = false;
 
 let json_catalog_number = "2023-999";
 
@@ -176,6 +177,9 @@ async function generateData(){
     
     
     function presentation_by_sorting(collection_details){
+        console.log("present details: " + collection_details);
+        console.log(collection_details);
+
         const temp = document.getElementsByTagName("template")[2];
         const clone = temp.content.cloneNode(true);
         const snickers_container = clone.querySelector(".snickers-container");
@@ -478,10 +482,16 @@ async function generateData(){
         }        
 
         if(ch_box_values_list.length==0){
+            if(status_price_range){
+                console.log("filtred_collection");
+                console.log(filtred_collection);
+                price_range(valueInputMin, valueInputMax);
+            } 
             container_presentation.innerHTML='';
             checkbox_sex('women');
         }
         else{
+            console.log("else");
             checkbox_status();
         }
 
@@ -976,6 +986,7 @@ rangeInput.forEach(input =>{
 });
 
     button_price_filter.addEventListener('click', ()=>{
+        status_price_range = true;
         valueInputMin = rangeInput[0].value;
         valueInputMax = rangeInput[1].value;
         price_range(valueInputMin, valueInputMax)
@@ -984,14 +995,24 @@ rangeInput.forEach(input =>{
     function price_range(priceMin, priceMax){
         let item_price;
         let new_collect;
-
+        new_collection_details={};
+        console.log(sex_status)
 
         if (sex_status=="men" || sex_status=="women"){
-            new_collect = filtred_collection;
+            new_collect = filtred_collection;            
             if(!ch_box_values_list.length==0){
                 new_collect = new_collection_details;
             }
+            for (key in new_collect){
+                item_price = new_collect[key].new_price
+                if (item_price > priceMin && item_price < priceMax) {
+                    new_collection_details[key]=new_collect[key];
+                    console.log("if men/women: ")
+                    console.log(new_collect[key])
+                }
+            } 
         } 
+        
         if(!ch_box_values_list.length==0){
             new_collect = new_collection_details;            
             for (key in new_collect){
@@ -1003,12 +1024,15 @@ rangeInput.forEach(input =>{
             } 
         }
         else{
+            new_collect = collection_details;
             for (key in new_collect){
                 item_price = new_collect[key].new_price
                 if (item_price > priceMin && item_price < priceMax) {
                     new_collection_details[key]=new_collect[key];
                 }
             } 
+            console.log("else: ");
+            console.log(new_collection_details);
         }
 
         container_presentation.innerHTML='';
