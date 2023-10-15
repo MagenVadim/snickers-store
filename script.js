@@ -372,7 +372,7 @@ async function generateData(){
                 })
         
                 container_presentation.innerHTML='';        
-                main_page(new_collection_details);
+                presentation_by_sorting(new_collection_details);
                 console.log(new_collection_details)
             }
     
@@ -393,7 +393,7 @@ async function generateData(){
                         new_collection_details[key]=collection_details[key];            
                     })
                     container_presentation.innerHTML='';
-                    main_page(new_collection_details);
+                    presentation_by_sorting(new_collection_details);
                 }
         
                 // (in other cases (when male/female gender checkbox is selected) or nothing is selected)
@@ -406,7 +406,7 @@ async function generateData(){
                         new_collection_details[key]=collection_details[key];            
                     })
                     container_presentation.innerHTML='';
-                    main_page(new_collection_details);
+                    presentation_by_sorting(new_collection_details);
                 }        
             }
         }    
