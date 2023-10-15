@@ -366,19 +366,16 @@ async function generateData(){
                         } 
                     })          
                 }
-        
                 array_key_styles.forEach((key)=>{            
-                    new_collection_details[key]=collection_details[key];            
+                    new_collection_details[key]=collection_details[key];       
                 })
-        
+
                 container_presentation.innerHTML='';        
                 presentation_by_sorting(new_collection_details);
-                console.log(new_collection_details)
             }
     
         
             if(ch_box_values_list.includes('latest')){
-        
                 // if one or more of the checkbox styles (running/basket/tennis) is checked 
                 if(Object.keys(new_collection_details).length>0){
         
@@ -412,15 +409,16 @@ async function generateData(){
         }    
     
         // condition when both checkbockes are checked ('men'/'women')
-        if (ch_bx_true==0 || (ch_box_values_list.includes('men') && ch_box_values_list.includes('women') && ch_box_values_list.length==2) ) {
-            collection_details = new_collection_details_by_prices;
-
+        if (ch_bx_true==0) {
             if (status_price_range){
-                collection_details = new_collection_details_by_prices;
+                new_collect = new_collection_details_by_prices;
+            }
+            if(sex_status=="men" || sex_status=="women"){
+                new_collect = filtred_collection;
             }
 
             container_presentation.innerHTML='';
-            main_page(collection_details);
+            presentation_by_sorting(new_collect);
             
         }
     }
