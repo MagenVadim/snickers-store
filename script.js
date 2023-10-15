@@ -73,6 +73,7 @@ const price_range = document.querySelector('.price-range-wrapper');
 const button_price_filter = document.querySelector('.price-filter');
 let ch_box_values_list=[];
 let new_collection_details = {};
+let new_collection_details_by_prices = {};
 let status_price_range = false;
 
 let json_catalog_number = "2023-999";
@@ -241,7 +242,9 @@ async function generateData(){
                 slick_slide.appendChild(new_icon);
             }                                
         }
-        container_presentation.appendChild(snickers_container); 
+        container_presentation.appendChild(snickers_container);
+        let a = document.querySelectorAll(".slick-slide");
+        return a; 
     }
     
     //create an array consisting of objects (ID - price)
@@ -305,6 +308,11 @@ async function generateData(){
 
         filtred_collection=[];
 
+        if(status_price_range){
+            collection_details=new_collection_details_by_prices;
+            console.log(collection_details);
+        }
+
         for (key in collection_details){
             if(income_sex==collection_details[key].sex){  
                 container_presentation.innerHTML='';          
@@ -312,7 +320,7 @@ async function generateData(){
             } 
         }  
     
-        let b = main_page(filtred_collection); // array containing all icons of all Snickers Items of the Home page.
+        let b = presentation_by_sorting(filtred_collection); // array containing all icons of all Snickers Items of the Home page.
         move_to_detailes(b); 
         
         return filtred_collection;    
@@ -341,6 +349,11 @@ async function generateData(){
             if (sex_status=="men" || sex_status=="women"){
                 new_collect = filtred_collection;
             } 
+
+            if (status_price_range){
+                new_collect = new_collection_details_by_prices;
+            }
+
     
             if(ch_box_values_list.includes('running') || ch_box_values_list.includes('basket') || ch_box_values_list.includes('tennis')) {
                 for (key in new_collect){
@@ -400,6 +413,12 @@ async function generateData(){
     
         // condition when both checkbockes are checked ('men'/'women')
         if (ch_bx_true==0 || (ch_box_values_list.includes('men') && ch_box_values_list.includes('women') && ch_box_values_list.length==2) ) {
+            collection_details = new_collection_details_by_prices;
+
+            if (status_price_range){
+                collection_details = new_collection_details_by_prices;
+            }
+
             container_presentation.innerHTML='';
             main_page(collection_details);
             
@@ -443,27 +462,8 @@ async function generateData(){
     
 
     men_list.addEventListener('click', ()=>{
-        console.log(status_price_range)
         sex_status= "men";
         filtred_collection=[];
-        
-        for (key in collection_details){
-            if(collection_details[key].sex==='men') filtred_collection[key]=collection_details[key];            
-        }
-
-        if(ch_box_values_list.length==0){
-            if(status_price_range){
-                price_range(valueInputMin, valueInputMax);
-                return;
-            } 
-            container_presentation.innerHTML='';
-            checkbox_sex('men');
-        }
-        else{
-            checkbox_status();
-        }
-
-
         if(!underline_men.style.backgroundColor){
             underline_men.style.backgroundColor="#fc701c"
         }
@@ -474,30 +474,28 @@ async function generateData(){
             underline_home.style.backgroundColor=null;
         } 
 
-    })
-    
-    women_list.addEventListener('click', ()=>{
-        
-        sex_status="women";
-        filtred_collection=[];
 
         for (key in collection_details){
-            if(collection_details[key].sex==='women') filtred_collection[key]=collection_details[key];            
-        }        
+            if(collection_details[key].sex==='men') filtred_collection[key]=collection_details[key];            
+        }
 
         if(ch_box_values_list.length==0){
-            if(status_price_range){
-                price_range(valueInputMin, valueInputMax);
-                return;
-            } 
             container_presentation.innerHTML='';
-            checkbox_sex('women');
+            checkbox_sex('men');
         }
         else{
-            console.log("else");
             checkbox_status();
         }
 
+        console.log(underline_men.style.backgroundColor)
+
+
+
+    })
+    
+    women_list.addEventListener('click', ()=>{       
+        sex_status="women";
+        filtred_collection=[];
 
         if(!underline_women.style.backgroundColor){
             underline_women.style.backgroundColor="#fc701c"
@@ -508,6 +506,19 @@ async function generateData(){
         if(underline_home.style.backgroundColor){
             underline_home.style.backgroundColor=null;
         } 
+
+        for (key in collection_details){
+            if(collection_details[key].sex==='women') filtred_collection[key]=collection_details[key];            
+        }        
+
+        if(ch_box_values_list.length==0){
+            container_presentation.innerHTML='';
+            checkbox_sex('women');
+        }
+        else{
+            console.log("else");
+            checkbox_status();
+        }
     })
 
 
@@ -998,30 +1009,34 @@ rangeInput.forEach(input =>{
     function price_range(priceMin, priceMax){
         let item_price;
         let new_collect;
-        new_collection_details={};
+        new_collection_details_by_prices={};
+
+        console.log(new_collect);
 
         if (sex_status=="men" || sex_status=="women"){
             new_collect = filtred_collection;            
             if(!ch_box_values_list.length==0){
-                new_collect = new_collection_details;
+                new_collect = new_collection_details_by_prices;
+                console.log(new_collect);
             }
             for (key in new_collect){
                 item_price = new_collect[key].new_price
                 if (item_price > priceMin && item_price < priceMax) {
-                    new_collection_details[key]=new_collect[key];
+                    new_collection_details_by_prices[key]=new_collect[key];
                 }
             } 
-            console.log("if men/women: ")
-            console.log(new_collect)
         } 
         
         if(!ch_box_values_list.length==0){
-            new_collect = new_collection_details;            
+            
+            new_collect = new_collection_details_by_prices; 
+            console.log(new_collect);
+
             for (key in new_collect){
-                new_collection_details = {};
+                new_collection_details_by_prices = {};
                 item_price = new_collect[key].new_price
                 if (item_price > priceMin && item_price < priceMax) {
-                    new_collection_details[key]=new_collect[key];
+                    new_collection_details_by_prices[key]=new_collect[key];
                 }
             } 
         }
@@ -1032,13 +1047,13 @@ rangeInput.forEach(input =>{
             for (key in new_collect){
                 item_price = new_collect[key].new_price
                 if (item_price > priceMin && item_price < priceMax) {
-                    new_collection_details[key]=new_collect[key];
+                    new_collection_details_by_prices[key]=new_collect[key];
                 }
             }     
         }
 
         container_presentation.innerHTML='';
-        presentation_by_sorting(new_collection_details); 
+        presentation_by_sorting(new_collection_details_by_prices); 
     }
 
 }
