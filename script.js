@@ -74,6 +74,10 @@ const button_price_filter = document.querySelector('.price-filter');
 let ch_box_values_list=[];
 let new_collection_details = {};
 let new_collection_details_by_prices = {};
+let new_collection_details_by_prices_and_sexStatus = {};
+let new_collection_details_by_prices_and_chBox = {}
+let new_collection_details_by_prices_and_chBox_and_sexStatus = {};
+
 let status_price_range = false;
 
 let json_catalog_number = "2023-999";
@@ -462,6 +466,8 @@ async function generateData(){
     men_list.addEventListener('click', ()=>{
         sex_status= "men";
         filtred_collection=[];
+        new_collection_details_by_prices_and_chBox_and_sexStatus = {};
+
         if(!underline_men.style.backgroundColor){
             underline_men.style.backgroundColor="#fc701c"
         }
@@ -481,19 +487,27 @@ async function generateData(){
             container_presentation.innerHTML='';
             checkbox_sex('men');
         }
-        else{
-            checkbox_status();
+
+        if(ch_box_values_list.length>0 && status_price_range){        
+            for (key in new_collection_details_by_prices_and_chBox){  
+                if (new_collection_details_by_prices_and_chBox[key].sex==='men') {
+                    new_collection_details_by_prices_and_chBox_and_sexStatus[key] = new_collection_details_by_prices_and_chBox[key];
+                }
+            } 
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_prices_and_chBox_and_sexStatus);             
         }
 
-        console.log(underline_men.style.backgroundColor)
-
-
-
+        else{
+            console.log("checkbox_status")
+            checkbox_status();
+        }
     })
     
     women_list.addEventListener('click', ()=>{       
         sex_status="women";
         filtred_collection=[];
+        new_collection_details_by_prices_and_chBox_and_sexStatus = {};
 
         if(!underline_women.style.backgroundColor){
             underline_women.style.backgroundColor="#fc701c"
@@ -513,6 +527,17 @@ async function generateData(){
             container_presentation.innerHTML='';
             checkbox_sex('women');
         }
+
+        if(ch_box_values_list.length>0 && status_price_range){        
+            for (key in new_collection_details_by_prices_and_chBox){  
+                if (new_collection_details_by_prices_and_chBox[key].sex==='women') {
+                    new_collection_details_by_prices_and_chBox_and_sexStatus[key] = new_collection_details_by_prices_and_chBox[key];
+                }
+            } 
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_prices_and_chBox_and_sexStatus);             
+        }
+
         else{
             console.log("else");
             checkbox_status();
@@ -1008,36 +1033,37 @@ rangeInput.forEach(input =>{
         let item_price;
         let new_collect;
         new_collection_details_by_prices={};
+        new_collection_details_by_prices_and_sexStatus = {};
+        new_collection_details_by_prices_and_chBox = {};
 
-        console.log(new_collect);
 
         if (sex_status=="men" || sex_status=="women"){
-            new_collect = filtred_collection;            
-            if(!ch_box_values_list.length==0){
-                new_collect = new_collection_details_by_prices;
-                console.log(new_collect);
-            }
-            for (key in new_collect){
-                item_price = new_collect[key].new_price
+            for (key in filtred_collection){              
+                item_price = filtred_collection[key].new_price
                 if (item_price > priceMin && item_price < priceMax) {
-                    new_collection_details_by_prices[key]=new_collect[key];
+                    new_collection_details_by_prices_and_sexStatus[key]=filtred_collection[key];
                 }
             } 
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_prices_and_sexStatus); 
         } 
         
-        if(!ch_box_values_list.length==0){
-            
-            new_collect = new_collection_details_by_prices; 
-            console.log(new_collect);
 
-            for (key in new_collect){
-                new_collection_details_by_prices = {};
-                item_price = new_collect[key].new_price
+        if(ch_box_values_list.length>0){ 
+            console.log("price_Range and ch_box") 
+            console.log(new_collection_details)     
+            new_collect = new_collection_details;             
+
+            for (key in new_collection_details){
+                item_price = new_collection_details[key].new_price
                 if (item_price > priceMin && item_price < priceMax) {
-                    new_collection_details_by_prices[key]=new_collect[key];
+                    new_collection_details_by_prices_and_chBox[key]=new_collection_details[key];
                 }
             } 
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_prices_and_chBox); 
         }
+
 
         if(sex_status===undefined && ch_box_values_list.length==0){
             console.log("sex_status: " + sex_status);
@@ -1048,12 +1074,10 @@ rangeInput.forEach(input =>{
                     new_collection_details_by_prices[key]=new_collect[key];
                 }
             }     
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_prices); 
         }
-
-        container_presentation.innerHTML='';
-        presentation_by_sorting(new_collection_details_by_prices); 
     }
-
 }
 
 
