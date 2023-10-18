@@ -483,6 +483,17 @@ async function generateData(){
             if(collection_details[key].sex==='men') filtred_collection[key]=collection_details[key];            
         }
 
+        if(ch_box_values_list.length==0 && !status_price_range){
+            for (key in new_collection_details_by_prices){  
+                if (new_collection_details_by_prices[key].sex==='men') {
+                    new_collection_details_by_prices_and_sexStatus[key] = new_collection_details_by_prices[key];
+                }
+            } 
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_prices_and_sexStatus);  
+        }
+
+
         if(ch_box_values_list.length==0){
             container_presentation.innerHTML='';
             checkbox_sex('men');
@@ -523,9 +534,16 @@ async function generateData(){
             if(collection_details[key].sex==='women') filtred_collection[key]=collection_details[key];            
         }        
 
-        if(ch_box_values_list.length==0){
+
+
+        if(ch_box_values_list.length==0 && !status_price_range){
+            for (key in new_collection_details_by_prices){  
+                if (new_collection_details_by_prices[key].sex==='women') {
+                    new_collection_details_by_prices_and_sexStatus[key] = new_collection_details_by_prices[key];
+                }
+            } 
             container_presentation.innerHTML='';
-            checkbox_sex('women');
+            presentation_by_sorting(new_collection_details_by_prices_and_sexStatus);  
         }
 
         if(ch_box_values_list.length>0 && status_price_range){        
@@ -537,6 +555,13 @@ async function generateData(){
             container_presentation.innerHTML='';
             presentation_by_sorting(new_collection_details_by_prices_and_chBox_and_sexStatus);             
         }
+
+        if (status_price_range){
+            console.log("status_price_range")
+            container_presentation.innerHTML='';
+            checkbox_sex('women');
+        }
+
 
         else{
             console.log("else");
@@ -1036,17 +1061,45 @@ rangeInput.forEach(input =>{
         new_collection_details_by_prices_and_sexStatus = {};
         new_collection_details_by_prices_and_chBox = {};
 
+        console.log("priceMin: " + priceMin + " priceMax: " + priceMax)
+        console.log("collection_details");
+        console.log(collection_details);
+        
+        // first of all we compose arry by Price Range parameters
+        for (key in collection_details){
+            item_price = collection_details[key].new_price
+            if (item_price > priceMin && item_price < priceMax) {
+                new_collection_details_by_prices[key]=collection_details[key];
+            }
+        }    
 
-        if (sex_status=="men" || sex_status=="women"){
-            for (key in filtred_collection){              
-                item_price = filtred_collection[key].new_price
-                if (item_price > priceMin && item_price < priceMax) {
-                    new_collection_details_by_prices_and_sexStatus[key]=filtred_collection[key];
+
+        if ((sex_status=="men" || sex_status=="women") && status_price_range){
+            for (key in new_collection_details_by_prices){  
+                if (new_collection_details_by_prices[key].sex==='women') {
+                    new_collection_details_by_prices_and_sexStatus[key] = new_collection_details_by_prices[key];
+                }
+                if (new_collection_details_by_prices[key].sex==='men') {
+                    new_collection_details_by_prices_and_sexStatus[key] = new_collection_details_by_prices[key];
                 }
             } 
+            console.log(new_collection_details_by_prices_and_sexStatus)
             container_presentation.innerHTML='';
-            presentation_by_sorting(new_collection_details_by_prices_and_sexStatus); 
-        } 
+            presentation_by_sorting(new_collection_details_by_prices_and_sexStatus);  
+        }
+
+
+
+        // if (sex_status=="men" || sex_status=="women"){
+        //     for (key in filtred_collection){              
+        //         item_price = filtred_collection[key].new_price
+        //         if (item_price > priceMin && item_price < priceMax) {
+        //             new_collection_details_by_prices_and_sexStatus[key]=filtred_collection[key];
+        //         }
+        //     } 
+        //     container_presentation.innerHTML='';
+        //     presentation_by_sorting(new_collection_details_by_prices_and_sexStatus); 
+        // } 
         
 
         if(ch_box_values_list.length>0){ 
