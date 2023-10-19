@@ -344,11 +344,22 @@ async function generateData(){
         
         // firstly, check if one of conditions is selected ('men'/'women'), and add to new array ("new_collect") all Snickers items to match to this criterion.
         if(ch_box_values_list.length>0){
-            if (sex_status=="men" || sex_status=="women"){
+
+            if (sex_status && status_price_range){
+                console.log("SexStatus & PriceRangeStatus");
+                console.log(new_collection_details_by_prices_and_sexStatus);
+                new_collect=new_collection_details_by_prices_and_sexStatus;
+
+            }
+
+            if (sex_status && !status_price_range){
+                console.log("only sex status")
                 new_collect = filtred_collection;
             } 
 
-            if (status_price_range){
+            if (status_price_range && !sex_status){
+                console.log("status_price_range");
+                console.log(status_price_range);
                 new_collect = new_collection_details_by_prices;
             }
 
@@ -459,10 +470,7 @@ async function generateData(){
 
     men_list.addEventListener('click', ()=>{
         sex_status= "men";
-        filtred_collection=[];
-        console.log("status_price_range: " + status_price_range)
-        new_collection_details_by_prices_and_sexStatus = {};
-        new_collection_details_by_prices_and_chBox_and_sexStatus = {};
+        filtred_collection=[];              
 
         if(!underline_men.style.backgroundColor){
             underline_men.style.backgroundColor="#fc701c"
@@ -480,11 +488,17 @@ async function generateData(){
         }
 
         if(ch_box_values_list.length==0 && status_price_range){
+            console.log("new_collection_details_by_prices");
+            console.log(new_collection_details_by_prices);
+
+            new_collection_details_by_prices_and_sexStatus = {};
+
             for (key in new_collection_details_by_prices){  
                 if (new_collection_details_by_prices[key].sex==='men') {
                     new_collection_details_by_prices_and_sexStatus[key] = new_collection_details_by_prices[key];
                 }
             } 
+            console.log("ch_box & price_range");
             console.log(new_collection_details_by_prices_and_sexStatus);
             container_presentation.innerHTML='';
             presentation_by_sorting(new_collection_details_by_prices_and_sexStatus);  
@@ -492,31 +506,29 @@ async function generateData(){
 
 
         if(ch_box_values_list.length==0 && !status_price_range){
+            console.log("checkbox_sex()");
             container_presentation.innerHTML='';
             checkbox_sex('men');
         }
 
-        if(ch_box_values_list.length>0 && status_price_range){        
+        if(ch_box_values_list.length>0 && status_price_range){
+            new_collection_details_by_prices_and_chBox_and_sexStatus = {};
+
             for (key in new_collection_details_by_prices_and_chBox){  
                 if (new_collection_details_by_prices_and_chBox[key].sex==='men') {
                     new_collection_details_by_prices_and_chBox_and_sexStatus[key] = new_collection_details_by_prices_and_chBox[key];
                 }
             } 
+            console.log("ch_box_values_list && status_price_range");
+            console.log(new_collection_details_by_prices_and_chBox_and_sexStatus);
             container_presentation.innerHTML='';
             presentation_by_sorting(new_collection_details_by_prices_and_chBox_and_sexStatus);             
         }
-
-        // else{
-        //     console.log("checkbox_status")
-        //     checkbox_status();
-        // }
     })
     
     women_list.addEventListener('click', ()=>{       
         sex_status="women";
-        filtred_collection=[];
-        new_collection_details_by_prices_and_sexStatus = {};
-        new_collection_details_by_prices_and_chBox_and_sexStatus = {};
+        filtred_collection=[];              
 
         if(!underline_women.style.backgroundColor){
             underline_women.style.backgroundColor="#fc701c"
@@ -532,15 +544,15 @@ async function generateData(){
             if(collection_details[key].sex==='women') filtred_collection[key]=collection_details[key];            
         }        
 
-
-
         if(ch_box_values_list.length==0 && status_price_range){
+            new_collection_details_by_prices_and_sexStatus = {};
+
             for (key in new_collection_details_by_prices){  
                 if (new_collection_details_by_prices[key].sex==='women') {
-
                     new_collection_details_by_prices_and_sexStatus[key] = new_collection_details_by_prices[key];
                 }
             } 
+            console.log("ch_box & price_range");
             console.log(new_collection_details_by_prices_and_sexStatus);
             container_presentation.innerHTML='';
             presentation_by_sorting(new_collection_details_by_prices_and_sexStatus);  
@@ -548,24 +560,24 @@ async function generateData(){
 
 
         if(ch_box_values_list.length==0 && !status_price_range){
+            console.log("only ch_box");
             container_presentation.innerHTML='';
             checkbox_sex('men');
         }
 
-        if(ch_box_values_list.length>0 && status_price_range){        
+        if(ch_box_values_list.length>0 && status_price_range){      
+            new_collection_details_by_prices_and_chBox_and_sexStatus = {};
+
             for (key in new_collection_details_by_prices_and_chBox){  
                 if (new_collection_details_by_prices_and_chBox[key].sex==='women') {
                     new_collection_details_by_prices_and_chBox_and_sexStatus[key] = new_collection_details_by_prices_and_chBox[key];
                 }
             } 
+            console.log("ch_box_values_list && status_price_range");
+            console.log(new_collection_details_by_prices_and_chBox_and_sexStatus);
             container_presentation.innerHTML='';
             presentation_by_sorting(new_collection_details_by_prices_and_chBox_and_sexStatus);             
         }
-
-        // else{
-        //     console.log("else");
-        //     checkbox_status();
-        // }
     })
 
 
