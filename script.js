@@ -77,6 +77,7 @@ let new_collection_details_by_prices = {};
 let new_collection_details_by_prices_and_sexStatus = {};
 let new_collection_details_by_prices_and_chBox = {}
 let new_collection_details_by_prices_and_chBox_and_sexStatus = {};
+let new_collection_details_by_checkboxes = {};
 
 let status_price_range = false;
 
@@ -333,103 +334,142 @@ async function generateData(){
         ch_box_values_list = [];   
         let array_key_styles = [];
         let new_collect = collection_details;
-        new_collection_details = [];
+        new_collection_details_by_checkboxes = [];
+
     
         checkboxes_array.forEach((buttonCheckbox)=>{       
             if(buttonCheckbox.checked===true){
                 ch_bx_true +=1;
                 ch_box_values_list.push(buttonCheckbox.value) // the function adds the values of checked checkboxes to the array.  
             };       
-        })        
-        
+        }) 
+        console.log("new_collection_details_by_prices_and_chBox_and_sexStatus");    
+        console.log(new_collection_details_by_prices_and_chBox_and_sexStatus);    
+
         // firstly, check if one of conditions is selected ('men'/'women'), and add to new array ("new_collect") all Snickers items to match to this criterion.
         if(ch_box_values_list.length>0){
 
-            if (sex_status && status_price_range){
-                console.log("SexStatus & PriceRangeStatus");
-                console.log(new_collection_details_by_prices_and_sexStatus);
-                new_collect=new_collection_details_by_prices_and_sexStatus;
-
-            }
-
-            if (sex_status && !status_price_range){
-                console.log("only sex status")
-                new_collect = filtred_collection;
-            } 
-
-            if (status_price_range && !sex_status){
-                console.log("status_price_range");
-                console.log(status_price_range);
-                new_collect = new_collection_details_by_prices;
-            }
-
-    
-            if(ch_box_values_list.includes('running') || ch_box_values_list.includes('basket') || ch_box_values_list.includes('tennis')) {
-                for (key in new_collect){
-                    let item_style = collection_details[key].style;            
-        
-                    ch_box_values_list.forEach((val)=>{                    
-                        // add in "array_key_styles" the each "style value" if they checked, for passing in "main_page()" function
-                        if(val==item_style){
-                        array_key_styles.push(key);
-                        } 
-                    })          
+// если выбран фильтр Price Range и CheckBox то формируется массив с этой комбинацией параметров.
+            if (status_price_range ){
+                new_collection_details_by_prices_and_chBox = {};
+                let new_collection_details_by_prices_and_chBox_NEW = {};
+                for (key in new_collection_details_by_prices){
+                    ch_box_values_list.forEach((val)=>{
+                        if(new_collection_details_by_prices[key].style==val){
+                            new_collection_details_by_prices_and_chBox[key] = new_collection_details_by_prices[key]
+                        }
+                    })                    
                 }
-                array_key_styles.forEach((key)=>{            
-                    new_collection_details[key]=collection_details[key];       
-                })
-
-                container_presentation.innerHTML='';        
-                presentation_by_sorting(new_collection_details);
-            }
-    
-        
-            if(ch_box_values_list.includes('latest')){
-                // if one or more of the checkbox styles (running/basket/tennis) is checked 
-                if(Object.keys(new_collection_details).length>0){
-        
-                    array_key_styles=[];
-                    for (key in new_collection_details){
-                        let collection_name = new_collection_details[key].collection; 
-                        if(collection_name=='New')array_key_styles.push(key);               
+                for (key in new_collection_details_by_prices_and_chBox){                    
+                    if (new_collection_details_by_prices_and_chBox[key].collection=='New'){
+                        new_collection_details_by_prices_and_chBox_NEW[key]=new_collection_details_by_prices_and_chBox[key]
                     }
-        
-                    new_collection_details={};
-                    array_key_styles.forEach((key)=>{            
-                        new_collection_details[key]=collection_details[key];            
-                    })
-                    container_presentation.innerHTML='';
-                    presentation_by_sorting(new_collection_details);
                 }
-        
-                // (in other cases (when male/female gender checkbox is selected) or nothing is selected)
-                else {
-                    for (key in new_collect){
-                        let collection_name = new_collect[key].collection;                
-                        if(collection_name=='New')array_key_styles.push(key);      
-                    }
-                    array_key_styles.forEach((key)=>{            
-                        new_collection_details[key]=collection_details[key];            
-                    })
-                    container_presentation.innerHTML='';
-                    presentation_by_sorting(new_collection_details);
-                }        
-            }
-        }    
-    
-        // condition when both checkbockes are checked ('men'/'women')
-        if (ch_bx_true==0) {
-            if (status_price_range){
-                new_collect = new_collection_details_by_prices;
-            }
-            if(sex_status=="men" || sex_status=="women"){
-                new_collect = filtred_collection;
-            }
+                if(ch_box_values_list.includes('latest')){
+                    if(Object.keys(new_collection_details_by_prices_and_chBox_NEW).length>0){
+                        new_collection_details_by_prices_and_chBox = new_collection_details_by_prices_and_chBox_NEW
+                    }; 
+                }
 
-            container_presentation.innerHTML='';
-            presentation_by_sorting(new_collect);
-            
-        }
+                console.log(new_collection_details_by_prices_and_chBox) 
+                container_presentation.innerHTML='';
+                presentation_by_sorting(new_collection_details_by_prices_and_chBox);
+
+
+                if(sex_status){
+                    new_collection_details_by_prices_and_chBox_and_sexStatus = {};
+                    for (key in new_collection_details_by_prices_and_chBox){  
+                        if(sex_status=="women"){                        
+                            if (new_collection_details_by_prices_and_chBox[key].sex==='women') {
+                                new_collection_details_by_prices_and_chBox_and_sexStatus[key] = new_collection_details_by_prices_and_chBox[key];
+                            }
+                        }
+                        if(sex_status=="men"){
+                            if (new_collection_details_by_prices_and_chBox[key].sex==='men') {
+                                new_collection_details_by_prices_and_chBox_and_sexStatus[key] = new_collection_details_by_prices_and_chBox[key];
+                            }
+                        }
+                    } 
+                    console.log(new_collection_details_by_prices_and_chBox_and_sexStatus)
+                    container_presentation.innerHTML='';
+                    presentation_by_sorting(new_collection_details_by_prices_and_chBox_and_sexStatus);
+
+                }
+
+            }
+    
+// ОСНОВНАЯ ФУНКЦИЯ
+
+
+            // if(ch_box_values_list.includes('running') || ch_box_values_list.includes('basket') || ch_box_values_list.includes('tennis')) {
+            //     console.log('running || basket || tennis');
+            //     console.log('new_collect: ');
+            //     console.log(new_collect);
+            //     for (key in new_collect){
+            //         let item_style = collection_details[key].style;            
+        
+            //         ch_box_values_list.forEach((val)=>{                    
+            //             // add in "array_key_styles" the each "style value" if they checked, for passing in "main_page()" function
+
+            //             if(val==item_style){
+            //             array_key_styles.push(key);
+            //             } 
+            //         })          
+            //     }
+            //     array_key_styles.forEach((key)=>{            
+            //         new_collection_details_by_checkboxes[key]=collection_details[key];       
+            //     })
+            //     console.log("ch_box_values_list");
+            //     console.log(new_collection_details_by_checkboxes);
+
+            //     container_presentation.innerHTML='';        
+            //     presentation_by_sorting(new_collection_details_by_checkboxes);
+            // }
+    
+        
+            // if(ch_box_values_list.includes('latest')){
+            //     // if one or more of the checkbox styles (running/basket/tennis) is checked 
+            //     if(Object.keys(new_collection_details_by_checkboxes).length>0){
+        
+            //         array_key_styles=[];
+            //         for (key in new_collection_details_by_checkboxes){
+            //             let collection_name = new_collection_details_by_checkboxes[key].collection; 
+            //             if(collection_name=='New')array_key_styles.push(key);               
+            //         }
+        
+            //         new_collection_details_by_checkboxes={};
+            //         array_key_styles.forEach((key)=>{            
+            //             new_collection_details_by_checkboxes[key]=collection_details[key];            
+            //         })
+
+            //         console.log("ch_box_values_list_latest");
+            //         console.log(new_collection_details_by_checkboxes);
+
+            //         container_presentation.innerHTML='';
+            //         presentation_by_sorting(new_collection_details_by_checkboxes);
+            //     }
+        
+            //     // (in other cases (when male/female gender checkbox is selected) or nothing is selected)
+            //     else {
+            //         for (key in new_collect){
+            //             let collection_name = new_collect[key].collection;                
+            //             if(collection_name=='New')array_key_styles.push(key);      
+            //         }
+            //         array_key_styles.forEach((key)=>{            
+            //             new_collection_details_by_checkboxes[key]=collection_details[key];            
+            //         })
+
+            //         console.log("else");
+            //         console.log(new_collection_details_by_checkboxes);
+
+            //         container_presentation.innerHTML='';
+            //         presentation_by_sorting(new_collection_details_by_checkboxes);
+            //     }        
+            // }
+
+
+
+        }       
     }
     
     // in an array of all checkbox elements, find the checkbox on which the click was made and call the function with this value.
@@ -491,6 +531,7 @@ async function generateData(){
             console.log("new_collection_details_by_prices");
             console.log(new_collection_details_by_prices);
 
+            console.log(new_collection_details_by_prices_and_sexStatus);
             new_collection_details_by_prices_and_sexStatus = {};
 
             for (key in new_collection_details_by_prices){  
@@ -514,6 +555,9 @@ async function generateData(){
         if(ch_box_values_list.length>0 && status_price_range){
             new_collection_details_by_prices_and_chBox_and_sexStatus = {};
 
+            console.log("new_collection_details_by_prices_and_chBox");
+            console.log(new_collection_details_by_prices_and_chBox);
+
             for (key in new_collection_details_by_prices_and_chBox){  
                 if (new_collection_details_by_prices_and_chBox[key].sex==='men') {
                     new_collection_details_by_prices_and_chBox_and_sexStatus[key] = new_collection_details_by_prices_and_chBox[key];
@@ -528,7 +572,8 @@ async function generateData(){
     
     women_list.addEventListener('click', ()=>{       
         sex_status="women";
-        filtred_collection=[];              
+        filtred_collection=[];
+        
 
         if(!underline_women.style.backgroundColor){
             underline_women.style.backgroundColor="#fc701c"
@@ -545,6 +590,8 @@ async function generateData(){
         }        
 
         if(ch_box_values_list.length==0 && status_price_range){
+
+            console.log(new_collection_details_by_prices_and_sexStatus);
             new_collection_details_by_prices_and_sexStatus = {};
 
             for (key in new_collection_details_by_prices){  
@@ -1068,7 +1115,7 @@ rangeInput.forEach(input =>{
     function price_range(priceMin, priceMax){
         let item_price;
         new_collection_details_by_prices={};
-        new_collection_details_by_prices_and_sexStatus = {};
+       new_collection_details_by_prices_and_sexStatus = {};        
         new_collection_details_by_prices_and_chBox = {};
 
         console.log("priceMin: " + priceMin + " priceMax: " + priceMax)
@@ -1108,16 +1155,16 @@ rangeInput.forEach(input =>{
 
 
 
-        // if (sex_status=="men" || sex_status=="women"){
-        //     for (key in filtred_collection){              
-        //         item_price = filtred_collection[key].new_price
-        //         if (item_price > priceMin && item_price < priceMax) {
-        //             new_collection_details_by_prices_and_sexStatus[key]=filtred_collection[key];
-        //         }
-        //     } 
-        //     container_presentation.innerHTML='';
-        //     presentation_by_sorting(new_collection_details_by_prices_and_sexStatus); 
-        // } 
+        if (sex_status=="men" || sex_status=="women"){
+            for (key in filtred_collection){              
+                item_price = filtred_collection[key].new_price
+                if (item_price > priceMin && item_price < priceMax) {
+                    new_collection_details_by_prices_and_sexStatus[key]=filtred_collection[key];
+                }
+            } 
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_prices_and_sexStatus); 
+        } 
         
 
         if(ch_box_values_list.length>0){ 
