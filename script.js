@@ -77,7 +77,9 @@ let new_collection_details_by_prices = {};
 let new_collection_details_by_prices_and_sexStatus = {};
 let new_collection_details_by_prices_and_chBox = {}
 let new_collection_details_by_prices_and_chBox_and_sexStatus = {};
+
 let new_collection_details_by_checkboxes = {};
+let new_collection_details_by_checkboxes_and_sexStatus = {};
 
 let status_price_range = false;
 
@@ -347,7 +349,9 @@ async function generateData(){
         // firstly, check if one of conditions is selected ('men'/'women'), and add to new array ("new_collect") all Snickers items to match to this criterion.
         if(ch_box_values_list.length>0){
 
-// если выбран фильтр Price Range и CheckBox то формируется массив с этой комбинацией параметров.
+
+
+// if the PriceRange and CheckBox filter is selected, an array with this combination of parameters is formed.
             if (status_price_range){
                 new_collection_details_by_prices_and_chBox = {};
                 let new_collection_details_by_prices_and_chBox_NEW = {};
@@ -396,13 +400,10 @@ async function generateData(){
 
             }
     
-//ОСНОВНАЯ ФУНКЦИЯ
 
+//MAIN CONDITION FOR COMPOSING CHECKBOXES ARRAY
 
             if(ch_box_values_list.includes('running') || ch_box_values_list.includes('basket') || ch_box_values_list.includes('tennis')) {
-                console.log('running || basket || tennis');
-                console.log('new_collect: ');
-                console.log(new_collect);
                 for (key in new_collect){
                     let item_style = collection_details[key].style;            
         
@@ -420,8 +421,15 @@ async function generateData(){
                 console.log("ch_box_values_list");
                 console.log(new_collection_details_by_checkboxes);
 
-                container_presentation.innerHTML='';        
-                presentation_by_sorting(new_collection_details_by_checkboxes);
+
+                if(!sex_status && !status_price_range){
+                    container_presentation.innerHTML='';        
+                    presentation_by_sorting(new_collection_details_by_checkboxes);
+                }
+
+                if(sex_status){
+                    if_sexStatus_and_checkBoxes()
+                }
             }
     
         
@@ -445,6 +453,10 @@ async function generateData(){
 
                     container_presentation.innerHTML='';
                     presentation_by_sorting(new_collection_details_by_checkboxes);
+
+                    if(sex_status){
+                        if_sexStatus_and_checkBoxes()
+                    }
                 }
         
                 // (in other cases (when male/female gender checkbox is selected) or nothing is selected)
@@ -462,7 +474,35 @@ async function generateData(){
 
                     container_presentation.innerHTML='';
                     presentation_by_sorting(new_collection_details_by_checkboxes);
+
+                    if(sex_status){
+                        if_sexStatus_and_checkBoxes()
+                    }
                 }        
+            }
+
+
+            // +++++++ select from the array of selected and filtered CheckBoxes parameters if SexStatus is also selected ++++++++
+            function if_sexStatus_and_checkBoxes(){
+                new_collection_details_by_checkboxes_and_sexStatus = {};
+
+                if(sex_status){
+                    for (key in new_collection_details_by_checkboxes){  
+                        if(sex_status=="women"){  
+                            if(new_collection_details_by_checkboxes[key].sex=="women"){
+                                new_collection_details_by_checkboxes_and_sexStatus[key] =  new_collection_details_by_checkboxes[key]  
+                            }                               
+                        }
+                        if(sex_status=="men"){
+                            if(new_collection_details_by_checkboxes[key].sex=="men"){
+                                new_collection_details_by_checkboxes_and_sexStatus[key] =  new_collection_details_by_checkboxes[key]  
+                            } 
+                        }
+                    } 
+                    console.log(new_collection_details_by_checkboxes_and_sexStatus)
+                    container_presentation.innerHTML='';
+                    presentation_by_sorting(new_collection_details_by_checkboxes_and_sexStatus);
+                }
             }
 
 
@@ -550,6 +590,21 @@ async function generateData(){
             checkbox_sex('men');
         }
 
+
+        if (ch_box_values_list.length>0 && sex_status){
+            new_collection_details_by_checkboxes_and_sexStatus = {}
+            
+            for (key in new_collection_details_by_checkboxes){  
+                if (new_collection_details_by_checkboxes[key].sex==='men') {
+                    new_collection_details_by_checkboxes_and_sexStatus[key] = new_collection_details_by_checkboxes[key];
+                }
+            } 
+            console.log(new_collection_details_by_checkboxes_and_sexStatus);
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_checkboxes_and_sexStatus);   
+        }
+
+
         if(ch_box_values_list.length>0 && status_price_range){
             new_collection_details_by_prices_and_chBox_and_sexStatus = {};
 
@@ -568,6 +623,8 @@ async function generateData(){
         }
     })
     
+
+
     women_list.addEventListener('click', ()=>{       
         sex_status="women";
         filtred_collection=[];
@@ -609,6 +666,21 @@ async function generateData(){
             container_presentation.innerHTML='';
             checkbox_sex('women');
         }
+
+
+        if (ch_box_values_list.length>0 && sex_status){
+            new_collection_details_by_checkboxes_and_sexStatus = {}
+            
+            for (key in new_collection_details_by_checkboxes){  
+                if (new_collection_details_by_checkboxes[key].sex==='women') {
+                    new_collection_details_by_checkboxes_and_sexStatus[key] = new_collection_details_by_checkboxes[key];
+                }
+            } 
+            console.log(new_collection_details_by_checkboxes_and_sexStatus);
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_checkboxes_and_sexStatus);   
+        }
+
 
         if(ch_box_values_list.length>0 && status_price_range){      
             new_collection_details_by_prices_and_chBox_and_sexStatus = {};
@@ -1129,7 +1201,7 @@ rangeInput.forEach(input =>{
         console.log(new_collection_details_by_prices);
 
 
-        if (sex_status=="men" && status_price_range){
+        if (sex_status=="men" && status_price_range && ch_box_values_list.length==0){
             for (key in new_collection_details_by_prices){  
                 if (new_collection_details_by_prices[key].sex==='men') {
                     new_collection_details_by_prices_and_sexStatus[key] = new_collection_details_by_prices[key];
@@ -1140,7 +1212,7 @@ rangeInput.forEach(input =>{
             presentation_by_sorting(new_collection_details_by_prices_and_sexStatus);  
         }
 
-        if (sex_status=="women" && status_price_range){
+        if (sex_status=="women" && status_price_range && ch_box_values_list.length==0){
             for (key in new_collection_details_by_prices){  
                 if (new_collection_details_by_prices[key].sex==='women') {
                     new_collection_details_by_prices_and_sexStatus[key] = new_collection_details_by_prices[key];
@@ -1168,7 +1240,7 @@ rangeInput.forEach(input =>{
         //**************************** */
 
         if (sex_status && ch_box_values_list.length>0){
-            console.log(new_collection_details_by_prices_and_sexStatus);
+            console.log(new_collection_details_by_checkboxes);
         }
 
 
