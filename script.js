@@ -1188,7 +1188,7 @@ rangeInput.forEach(input =>{
     function price_range(priceMin, priceMax){
         let item_price;
         new_collection_details_by_prices={};
-       new_collection_details_by_prices_and_sexStatus = {};        
+        new_collection_details_by_prices_and_sexStatus = {};        
         new_collection_details_by_prices_and_chBox = {};
 
         // first of all we compose arry by Price Range parameters
@@ -1240,7 +1240,19 @@ rangeInput.forEach(input =>{
         //**************************** */
 
         if (sex_status && ch_box_values_list.length>0){
-            console.log(new_collection_details_by_checkboxes);
+            new_collection_details_by_prices_and_chBox_and_sexStatus = {};
+
+            console.log(new_collection_details_by_checkboxes_and_sexStatus);
+
+            for (key in new_collection_details_by_checkboxes_and_sexStatus){              
+                item_price = new_collection_details_by_checkboxes_and_sexStatus[key].new_price
+                if (item_price > priceMin && item_price < priceMax) {
+                    new_collection_details_by_prices_and_chBox_and_sexStatus[key]=new_collection_details_by_checkboxes_and_sexStatus[key];
+                }
+            } 
+            console.log(new_collection_details_by_prices_and_chBox_and_sexStatus);
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_prices_and_chBox_and_sexStatus); 
         }
 
 
