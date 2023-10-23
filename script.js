@@ -81,6 +81,9 @@ let new_collection_details_by_prices_and_chBox_and_sexStatus = {};
 let new_collection_details_by_checkboxes = {};
 let new_collection_details_by_checkboxes_and_sexStatus = {};
 
+let new_collection_details_by_prices_and_New = {}; // if only Latest checkbox parameter is true
+let new_collection_details_by_prices_and_chBox_NEW = {}; // if both checkboxes parameters (Run/Basket/Tennis) and Latest is true
+
 let status_price_range = false;
 
 let json_catalog_number = "2023-999";
@@ -292,6 +295,7 @@ async function generateData(){
 
     // event handler for the "check all" checkbox
     checkbox_all.addEventListener('click', () =>{
+        console.log("check all")
         if(checkbox_all.checked){
             checkboxes_array.forEach((buttonCheckbox)=>{       
                 if(buttonCheckbox.checked===false){
@@ -346,47 +350,90 @@ async function generateData(){
             };       
         }) 
 
+        if(ch_box_values_list.length==0){
+            console.log("ch_box_values_list.length: "+ ch_box_values_list.length)
+
+            if (status_price_range && sex_status){
+                console.log("ch_box_values_list - 0 && status_price_range +  sex_status")
+
+                container_presentation.innerHTML='';
+                presentation_by_sorting(new_collection_details_by_prices_and_sexStatus);
+                return
+            }
+
+            if (status_price_range){
+                console.log("ch_box_values_list - 0 && PriceRange ")
+
+                container_presentation.innerHTML='';
+                presentation_by_sorting(new_collection_details_by_prices);
+                return
+            }
+
+            if (sex_status){
+                console.log("ch_box_values_list - 0 && SexStatus ")
+
+                container_presentation.innerHTML='';
+                presentation_by_sorting(filtred_collection);
+                return
+            }
+            else {
+                console.log("ch_box_values_list - 0 && ELSE ")
+
+                container_presentation.innerHTML='';
+                main_page(collection_details)
+
+            }
+
+        }
+
         // firstly, check if one of conditions is selected ('men'/'women'), and add to new array ("new_collect") all Snickers items to match to this criterion.
         if(ch_box_values_list.length>0){
 
-
-
 // if the PriceRange and CheckBox filter is selected, an array with this combination of parameters is formed.
-            if (status_price_range){
-
+            if (status_price_range){ 
+                console.log("status_price_range")
+                
                 new_collection_details_by_prices_and_chBox = {};
-                let new_collection_details_by_prices_and_chBox_NEW = {};
+                new_collection_details_by_prices_and_New
+                new_collection_details_by_prices_and_chBox_NEW = {};                                
 
+                // 1 - check array Price and compose 2 different array: chBox и New
                 for (key in new_collection_details_by_prices){                   
                     ch_box_values_list.forEach((val)=>{
+                        //for "Run/Basket/Tennis" checkboxes parameters is true
                         if(new_collection_details_by_prices[key].style==val){
                             new_collection_details_by_prices_and_chBox[key] = new_collection_details_by_prices[key]
+                        }
+                           //for "Latest" checkbox parameter is true
+                        if(new_collection_details_by_prices[key].collection=="New"){
+                            new_collection_details_by_prices_and_New[key] = new_collection_details_by_prices[key]
                         }
                     })                    
                 }
                 
-                console.log(new_collection_details_by_prices_and_chBox);
-
+                // 2 - if both checkboxes parameters (Run/Basket/Tennis) and Latest is true -> compose one more array "chBox_NEW"
                 for (key in new_collection_details_by_prices_and_chBox){
-                    console.log(new_collection_details_by_prices_and_chBox[key].collection=='New');
                     if (new_collection_details_by_prices_and_chBox[key].collection=='New'){
                         new_collection_details_by_prices_and_chBox_NEW[key]=new_collection_details_by_prices_and_chBox[key]
                     }
                 }
 
-                console.log("new_collection_details_by_prices_and_chBox_NEW");
-                console.log(new_collection_details_by_prices_and_chBox_NEW);
-
                 if(ch_box_values_list.includes('latest')){
+                    console.log("ch_box_values_list.includes.latest")
+
                     if(Object.keys(new_collection_details_by_prices_and_chBox_NEW).length>0){
-                        new_collection_details_by_prices_and_chBox = new_collection_details_by_prices_and_chBox_NEW
+                        console.log("prices_and_chBox_NEW")
+                        container_presentation.innerHTML='';
+                        presentation_by_sorting(new_collection_details_by_prices_and_chBox_NEW);
+                        return
                     }; 
+
+                    if (Object.keys(new_collection_details_by_prices_and_New).length > 0) {
+                        console.log("prices_and_New")
+                        container_presentation.innerHTML='';
+                        presentation_by_sorting(new_collection_details_by_prices_and_New);
+                     }
                 }
-
-                console.log(new_collection_details_by_prices_and_chBox) 
-                container_presentation.innerHTML='';
-                presentation_by_sorting(new_collection_details_by_prices_and_chBox);
-
 
                 if(sex_status){
                     new_collection_details_by_prices_and_chBox_and_sexStatus = {};
@@ -407,7 +454,6 @@ async function generateData(){
                     presentation_by_sorting(new_collection_details_by_prices_and_chBox_and_sexStatus);
 
                 }
-
             }
     
 
@@ -428,6 +474,7 @@ async function generateData(){
                 array_key_styles.forEach((key)=>{            
                     new_collection_details_by_checkboxes[key]=collection_details[key];       
                 })
+                
                 console.log("ch_box_values_list");
                 console.log(new_collection_details_by_checkboxes);
 
