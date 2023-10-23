@@ -353,20 +353,30 @@ async function generateData(){
 
 // if the PriceRange and CheckBox filter is selected, an array with this combination of parameters is formed.
             if (status_price_range){
+
                 new_collection_details_by_prices_and_chBox = {};
                 let new_collection_details_by_prices_and_chBox_NEW = {};
-                for (key in new_collection_details_by_prices){
+
+                for (key in new_collection_details_by_prices){                   
                     ch_box_values_list.forEach((val)=>{
                         if(new_collection_details_by_prices[key].style==val){
                             new_collection_details_by_prices_and_chBox[key] = new_collection_details_by_prices[key]
                         }
                     })                    
                 }
-                for (key in new_collection_details_by_prices_and_chBox){                    
+                
+                console.log(new_collection_details_by_prices_and_chBox);
+
+                for (key in new_collection_details_by_prices_and_chBox){
+                    console.log(new_collection_details_by_prices_and_chBox[key].collection=='New');
                     if (new_collection_details_by_prices_and_chBox[key].collection=='New'){
                         new_collection_details_by_prices_and_chBox_NEW[key]=new_collection_details_by_prices_and_chBox[key]
                     }
                 }
+
+                console.log("new_collection_details_by_prices_and_chBox_NEW");
+                console.log(new_collection_details_by_prices_and_chBox_NEW);
+
                 if(ch_box_values_list.includes('latest')){
                     if(Object.keys(new_collection_details_by_prices_and_chBox_NEW).length>0){
                         new_collection_details_by_prices_and_chBox = new_collection_details_by_prices_and_chBox_NEW
@@ -433,7 +443,7 @@ async function generateData(){
             }
     
         
-            if(ch_box_values_list.includes('latest')){
+            if(ch_box_values_list.includes('latest') && !status_price_range){
                 // if one or more of the checkbox styles (running/basket/tennis) is checked 
                 if(Object.keys(new_collection_details_by_checkboxes).length>0){
         
