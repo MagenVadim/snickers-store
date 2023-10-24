@@ -487,6 +487,28 @@ async function generateData(){
                 if(sex_status){
                     if_sexStatus_and_checkBoxes()
                 }
+
+       //******************** */
+                if (status_price_range && !sex_status){
+                    new_collection_details_by_prices_and_chBox = {};
+                    new_collection_details_by_prices_and_New
+                    new_collection_details_by_prices_and_chBox_NEW = {};  
+                    console.log("status_price_range");
+
+                    for (key in new_collection_details_by_prices){                   
+                        ch_box_values_list.forEach((val)=>{
+                            //for "Run/Basket/Tennis" checkboxes parameters is true
+                            if(new_collection_details_by_prices[key].style==val){
+                                new_collection_details_by_prices_and_chBox[key] = new_collection_details_by_prices[key]
+                            }
+                        })                    
+                    }
+                    console.log(new_collection_details_by_prices_and_New);
+                    container_presentation.innerHTML='';
+                    presentation_by_sorting(new_collection_details_by_prices_and_chBox);
+                }
+
+
             }
     
         
