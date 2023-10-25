@@ -480,11 +480,13 @@ async function generateData(){
 
 
                 if(!sex_status && !status_price_range){
+                    console.log("!sex_status && !status_price_range");
                     container_presentation.innerHTML='';        
                     presentation_by_sorting(new_collection_details_by_checkboxes);
                 }
 
                 if(sex_status){
+                    console.log("sex_status");
                     if_sexStatus_and_checkBoxes()
                 }
 
@@ -1102,6 +1104,8 @@ async function generateData(){
     
     
     start_home.addEventListener('click', ()=>{
+        sex_status = "";
+        console.log("start-home: " + sex_status);
         container_presentation.innerHTML='';
         disable_all_checkboxes();  //******************************************************************************
         let b = main_page(collection_details);
