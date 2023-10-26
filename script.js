@@ -1110,6 +1110,14 @@ async function generateData(){
         disable_all_checkboxes();  //******************************************************************************
         let b = main_page(collection_details);
         console.log(b);
+
+        priceInput[0].value = 50;
+        priceInput[1].value = 500;
+        rangeInput[0].value = 50;
+        range.style.left = 10 + "%";
+        rangeInput[1].value = 500;
+        range.style.right = 50 + "%";
+
     
         if (main.className=="main") {
             main.classList.toggle("hidden");
@@ -1120,9 +1128,6 @@ async function generateData(){
             move_to_detailes(b);
         }
 
-        if(!underline_home.style.backgroundColor){
-            underline_home.style.backgroundColor="#ff4000"
-        }
         if(underline_women.style.backgroundColor){
             underline_women.style.backgroundColor=null;
         }
