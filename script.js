@@ -269,23 +269,47 @@ async function generateData(){
     dropdown_button_sorted_by_price_low_high.addEventListener('click', ()=>{
         //sort the array in ascending order of price
         priceMap.sort((a, b) => a.price - b.price)
-        new_collection_details_by_price={};
+        new_collection_details_by_prices={};
+
+        if (sex_status==="women" || sex_status==="men"){           
+            priceMap.forEach((pair)=>{
+                if(filtred_collection[pair.id]){
+                    new_collection_details_by_prices[pair.id]=filtred_collection[pair.id];   
+                }                 
+            })          
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_prices);
+            return;   
+        }
+
         priceMap.forEach((pair)=>{
-            new_collection_details_by_price[pair.id]=collection_details[pair.id];    
+            new_collection_details_by_prices[pair.id]=collection_details[pair.id];    
         })
         container_presentation.innerHTML='';
-        presentation_by_sorting(new_collection_details_by_price);
+        presentation_by_sorting(new_collection_details_by_prices);
     })
     
     dropdown_button_sorted_by_price_high_low.addEventListener('click', ()=>{
         //sort the array in discending order of price
         priceMap.sort((a, b) => b.price - a.price)
-        new_collection_details_by_price={};
+        new_collection_details_by_prices={};
+        
+        if (sex_status==="women" || sex_status==="men"){           
+            priceMap.forEach((pair)=>{
+                if(filtred_collection[pair.id]){
+                    new_collection_details_by_prices[pair.id]=filtred_collection[pair.id];   
+                }                 
+            })          
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_prices);
+            return;   
+        }
+
         priceMap.forEach((pair)=>{
-            new_collection_details_by_price[pair.id]=collection_details[pair.id];    
+            new_collection_details_by_prices[pair.id]=collection_details[pair.id];    
         })
         container_presentation.innerHTML='';
-        presentation_by_sorting(new_collection_details_by_price);
+        presentation_by_sorting(new_collection_details_by_prices);
     })
     
     
