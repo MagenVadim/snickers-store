@@ -73,6 +73,7 @@ const price_range = document.querySelector('.price-range-wrapper');
 const button_price_filter = document.querySelector('.price-filter');
 let ch_box_values_list=[];
 let new_collection_details = {};
+let new_collection_details_by_price_sorting = {};
 let new_collection_details_by_prices = {};
 let new_collection_details_by_prices_and_sexStatus = {};
 let new_collection_details_by_prices_and_chBox = {}
@@ -269,47 +270,70 @@ async function generateData(){
     dropdown_button_sorted_by_price_low_high.addEventListener('click', ()=>{
         //sort the array in ascending order of price
         priceMap.sort((a, b) => a.price - b.price)
-        new_collection_details_by_prices={};
+        new_collection_details_by_price_sorting={};
 
         if (sex_status==="women" || sex_status==="men"){           
             priceMap.forEach((pair)=>{
                 if(filtred_collection[pair.id]){
-                    new_collection_details_by_prices[pair.id]=filtred_collection[pair.id];   
+                    new_collection_details_by_price_sorting[pair.id]=filtred_collection[pair.id];   
                 }                 
             })          
             container_presentation.innerHTML='';
-            presentation_by_sorting(new_collection_details_by_prices);
+            presentation_by_sorting(new_collection_details_by_price_sorting);
             return;   
         }
 
+        if(status_price_range){
+            priceMap.forEach((pair)=>{
+                if(new_collection_details_by_prices[pair.id]){
+                    new_collection_details_by_price_sorting[pair.id]=new_collection_details_by_prices[pair.id];   
+                }                 
+            })          
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_price_sorting);
+            return; 
+        }
+
+
         priceMap.forEach((pair)=>{
-            new_collection_details_by_prices[pair.id]=collection_details[pair.id];    
+            new_collection_details_by_price_sorting[pair.id]=collection_details[pair.id];    
         })
         container_presentation.innerHTML='';
-        presentation_by_sorting(new_collection_details_by_prices);
+        presentation_by_sorting(new_collection_details_by_price_sorting);
     })
     
     dropdown_button_sorted_by_price_high_low.addEventListener('click', ()=>{
         //sort the array in discending order of price
         priceMap.sort((a, b) => b.price - a.price)
-        new_collection_details_by_prices={};
+        new_collection_details_by_price_sorting={};
         
         if (sex_status==="women" || sex_status==="men"){           
             priceMap.forEach((pair)=>{
                 if(filtred_collection[pair.id]){
-                    new_collection_details_by_prices[pair.id]=filtred_collection[pair.id];   
+                    new_collection_details_by_price_sorting[pair.id]=filtred_collection[pair.id];   
                 }                 
             })          
             container_presentation.innerHTML='';
-            presentation_by_sorting(new_collection_details_by_prices);
+            presentation_by_sorting(new_collection_details_by_price_sorting);
             return;   
         }
 
+        if(status_price_range){
+            priceMap.forEach((pair)=>{
+                if(new_collection_details_by_prices[pair.id]){
+                    new_collection_details_by_price_sorting[pair.id]=new_collection_details_by_prices[pair.id];   
+                }                 
+            })          
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_price_sorting);
+            return; 
+        }
+
         priceMap.forEach((pair)=>{
-            new_collection_details_by_prices[pair.id]=collection_details[pair.id];    
+            new_collection_details_by_price_sorting[pair.id]=collection_details[pair.id];    
         })
         container_presentation.innerHTML='';
-        presentation_by_sorting(new_collection_details_by_prices);
+        presentation_by_sorting(new_collection_details_by_price_sorting);
     })
     
     
