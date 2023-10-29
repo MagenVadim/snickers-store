@@ -84,6 +84,7 @@ let new_collection_details_by_checkboxes_and_sexStatus = {};
 
 let new_collection_details_by_prices_and_New = {}; // if only Latest checkbox parameter is true
 let new_collection_details_by_prices_and_chBox_NEW = {}; // if both checkboxes parameters (Run/Basket/Tennis) and Latest is true
+let ch_bx_true;
 
 let status_price_range = false;
 
@@ -294,6 +295,17 @@ async function generateData(){
             return; 
         }
 
+        if(ch_bx_true>0){
+            priceMap.forEach((pair)=>{
+                if(new_collection_details_by_checkboxes[pair.id]){
+                    new_collection_details_by_price_sorting[pair.id]=new_collection_details_by_checkboxes[pair.id];   
+                }                 
+            })          
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_price_sorting);
+            return; 
+        }
+
 
         priceMap.forEach((pair)=>{
             new_collection_details_by_price_sorting[pair.id]=collection_details[pair.id];    
@@ -329,6 +341,17 @@ async function generateData(){
             return; 
         }
 
+        if(ch_bx_true>0){
+            priceMap.forEach((pair)=>{
+                if(new_collection_details_by_checkboxes[pair.id]){
+                    new_collection_details_by_price_sorting[pair.id]=new_collection_details_by_checkboxes[pair.id];   
+                }                 
+            })          
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_price_sorting);
+            return; 
+        }
+        
         priceMap.forEach((pair)=>{
             new_collection_details_by_price_sorting[pair.id]=collection_details[pair.id];    
         })
@@ -384,7 +407,7 @@ async function generateData(){
     // - at the same time the checkboxes "man" and "woman" are checked, then the function returns the page state to default,
     
     function checkbox_status(){
-        let ch_bx_true = 0;
+        ch_bx_true = 0;
         ch_box_values_list = [];   
         let array_key_styles = [];
         let new_collect = collection_details;
