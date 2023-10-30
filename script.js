@@ -273,6 +273,17 @@ async function generateData(){
         priceMap.sort((a, b) => a.price - b.price)
         new_collection_details_by_price_sorting={};
 
+        if (sex_status && status_price_range){
+            priceMap.forEach((pair)=>{
+                if(new_collection_details_by_prices_and_sexStatus[pair.id]){
+                    new_collection_details_by_price_sorting[pair.id]=new_collection_details_by_prices_and_sexStatus[pair.id];   
+                }                 
+            }) 
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_price_sorting);
+            return
+        }
+        
         if (sex_status==="women" || sex_status==="men"){           
             priceMap.forEach((pair)=>{
                 if(filtred_collection[pair.id]){
@@ -319,6 +330,18 @@ async function generateData(){
         priceMap.sort((a, b) => b.price - a.price)
         new_collection_details_by_price_sorting={};
         
+        if (sex_status && status_price_range){
+            priceMap.forEach((pair)=>{
+                if(new_collection_details_by_prices_and_sexStatus[pair.id]){
+                    new_collection_details_by_price_sorting[pair.id]=new_collection_details_by_prices_and_sexStatus[pair.id];   
+                }                 
+            }) 
+            container_presentation.innerHTML='';
+            presentation_by_sorting(new_collection_details_by_price_sorting);
+            return
+        }
+
+
         if (sex_status==="women" || sex_status==="men"){           
             priceMap.forEach((pair)=>{
                 if(filtred_collection[pair.id]){
